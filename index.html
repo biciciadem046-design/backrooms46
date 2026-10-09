@@ -1553,7 +1553,7 @@ function setupCameraButton(
 
         if(!active) return;
 
-        cameraYaw+=
+        cameraYaw-=
             direction*
             .035*
             sensitivity;
@@ -1727,7 +1727,7 @@ function toggleFlashlight(){
         flashlight.intensity=0;
 
         showMessage(
-            "FENERİN PİLİ BİTTİ",
+            "🔋 FENERİN PİLİ BİTTİ — ŞARJ OLUYOR",
             1500
         );
 
@@ -1906,13 +1906,13 @@ function updatePlayer(dt){
             new THREE.Vector3();
 
         move.x=
-            Math.sin(cameraYaw)*
+            -Math.sin(cameraYaw)*
             forward+
             Math.cos(cameraYaw)*
             side;
 
         move.z=
-            Math.cos(cameraYaw)*
+            -Math.cos(cameraYaw)*
             forward-
             Math.sin(cameraYaw)*
             side;
@@ -2894,6 +2894,7 @@ function updateBattery(dt){
 
     if(flashlightOn){
 
+        /* Fener açıkken pil azalır */
         battery-=dt*3;
 
         if(battery<=0){
@@ -2904,7 +2905,21 @@ function updateBattery(dt){
 
             flashlight.intensity=0;
 
+            showMessage(
+                "🔋 FENERİN PİLİ BİTTİ — ŞARJ OLUYOR",
+                1800
+            );
+
         }
+
+    }else{
+
+        /* Fener kapalıyken pil zamanla otomatik dolar.
+           Tam doluma yaklaşık 25 saniyede ulaşır. */
+        battery+=dt*4;
+
+        if(battery>100)
+            battery=100;
 
     }
 
