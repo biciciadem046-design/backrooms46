@@ -4,5200 +4,3263 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1,
-maximum-scale=1,
-minimum-scale=1,
-user-scalable=no,
-viewport-fit=cover">
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               minimum-scale=1,
+               user-scalable=no,
+               viewport-fit=cover">
 
 <title>BACKROOMS - Biciciademmm</title>
 
 <style>
-
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
 }
 
-html,
-body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
-    touch-action:none;
-    user-select:none;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    position:fixed;
-    inset:0;
-}
-
-#game{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+  font-family:Arial,sans-serif;
+  touch-action:none;
 }
 
 canvas{
-    display:block;
-    width:100%;
-    height:100%;
-    touch-action:none;
+  display:block;
+  width:100%;
+  height:100%;
 }
 
-
 /* =========================
-   BAŞLANGIÇ
+   START SCREEN
 ========================= */
 
 #startScreen{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    background:
-        radial-gradient(
-            circle,
-            #292512 0%,
-            #080806 55%,
-            #000 100%
-        );
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at center,#29200d 0%,#090704 55%,#000 100%);
+  color:white;
 }
 
 .startBox{
-    width:min(500px,92vw);
-    padding:30px 20px;
-
-    background:rgba(0,0,0,.75);
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    border-radius:15px;
+  width:min(90%,520px);
+  padding:35px;
+  text-align:center;
+  border:1px solid #9d7b31;
+  background:rgba(10,8,3,.88);
+  box-shadow:0 0 40px rgba(255,190,40,.15);
 }
 
 .startBox h1{
-    font-size:
-        clamp(35px,10vw,65px);
-
-    letter-spacing:6px;
-    color:#d8c66c;
-
-    margin-bottom:15px;
+  margin:0 0 12px;
+  color:#d6ad4c;
+  letter-spacing:5px;
+  font-size:42px;
 }
 
 .startBox p{
-    color:#aaa;
-    line-height:1.6;
-    margin:8px 0;
+  color:#aaa;
+  line-height:1.6;
 }
 
 #startButton{
-    width:90%;
-    max-width:350px;
-    height:65px;
-
-    margin-top:20px;
-
-    border:0;
-    border-radius:12px;
-
-    background:#d7c56c;
-    color:#111;
-
-    font-size:20px;
-    font-weight:bold;
+  margin-top:20px;
+  padding:16px 35px;
+  border:1px solid #d7b75b;
+  background:#161106;
+  color:#f2d878;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-
-/* =========================
-   YATAY UYARI
-========================= */
-
-#rotateScreen{
-    position:fixed;
-    inset:0;
-    z-index:2000;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#050505;
-
-    color:white;
-    text-align:center;
+#startButton:active{
+  transform:scale(.96);
 }
-
-.rotateBox{
-    width:85%;
-}
-
-.rotateIcon{
-    font-size:70px;
-    margin-bottom:20px;
-
-    animation:rotatePhone 2s infinite;
-}
-
-@keyframes rotatePhone{
-
-    0%{
-        transform:rotate(0);
-    }
-
-    50%{
-        transform:rotate(90deg);
-    }
-
-    100%{
-        transform:rotate(0);
-    }
-
-}
-
 
 /* =========================
    HUD
 ========================= */
 
 #hud{
-    position:fixed;
-
-    top:
-        calc(
-            8px +
-            env(safe-area-inset-top)
-        );
-
-    left:
-        calc(
-            8px +
-            env(safe-area-inset-left)
-        );
-
-    z-index:100;
-
-    width:210px;
-
-    padding:8px;
-
-    background:
-        rgba(0,0,0,.55);
-
-    border-radius:9px;
-
-    color:white;
-
-    pointer-events:none;
-
-    font-size:12px;
+  position:fixed;
+  left:15px;
+  top:15px;
+  z-index:100;
+  width:250px;
+  color:white;
+  pointer-events:none;
+  text-shadow:0 2px 4px #000;
 }
 
-.hudTitle{
-    color:#e5d477;
-    font-weight:bold;
-    margin-bottom:5px;
-}
-
-.stat{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    margin:4px 0;
+.barTitle{
+  font-size:12px;
+  margin-top:5px;
 }
 
 .bar{
-    width:90px;
-    height:8px;
-
-    background:#292929;
-
-    border-radius:10px;
-
-    overflow:hidden;
+  height:10px;
+  background:#222;
+  border:1px solid #555;
+  margin-bottom:5px;
 }
 
-.fill{
-    width:100%;
-    height:100%;
+.barInner{
+  height:100%;
+  width:100%;
 }
 
-#healthFill{
-    background:#d33;
+#healthBar{background:#b33;}
+#staminaBar{background:#ddd;}
+#batteryBar{background:#d4bd40;}
+
+#levelText{
+  margin-top:10px;
+  font-weight:bold;
+  color:#e4c867;
 }
-
-#staminaFill{
-    background:#d4bd51;
-}
-
-#batteryFill{
-    background:#ddd;
-}
-
-#objective{
-    margin-top:5px;
-    color:#ccc;
-}
-
-
-/* =========================
-   CROSSHAIR
-========================= */
-
-#crosshair{
-    position:fixed;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    width:7px;
-    height:7px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.8);
-
-    border-radius:50%;
-
-    z-index:50;
-
-    pointer-events:none;
-}
-
-
-/* =========================
-   MESAJ
-========================= */
 
 #message{
-    position:fixed;
-
-    left:50%;
-    bottom:18%;
-
-    transform:
-        translateX(-50%);
-
-    z-index:300;
-
-    max-width:80%;
-
-    padding:10px 15px;
-
-    background:
-        rgba(0,0,0,.7);
-
-    border-radius:8px;
-
-    color:white;
-
-    text-align:center;
-
-    opacity:0;
-
-    transition:.2s;
-
-    pointer-events:none;
+  position:fixed;
+  left:50%;
+  top:15%;
+  transform:translateX(-50%);
+  z-index:150;
+  max-width:90%;
+  text-align:center;
+  color:white;
+  font-size:22px;
+  font-weight:bold;
+  text-shadow:0 3px 8px #000;
+  pointer-events:none;
 }
 
-#message.show{
-    opacity:1;
+#crosshair{
+  position:fixed;
+  left:50%;
+  top:50%;
+  width:5px;
+  height:5px;
+  margin-left:-2px;
+  margin-top:-2px;
+  border-radius:50%;
+  background:white;
+  z-index:90;
+  pointer-events:none;
 }
-
 
 /* =========================
-   ETKİLEŞİM YAZISI
+   ROTATE SCREEN
 ========================= */
 
-#interactionHint{
-    position:fixed;
-
-    left:50%;
-    bottom:13%;
-
-    transform:
-        translateX(-50%);
-
-    z-index:250;
-
-    padding:8px 15px;
-
-    border-radius:8px;
-
-    background:
-        rgba(0,0,0,.65);
-
-    color:white;
-
-    display:none;
-
-    pointer-events:none;
-
-    font-size:13px;
+#rotateScreen{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  background:#050505;
+  padding:30px;
 }
 
+.rotateBox{
+  max-width:350px;
+}
+
+.rotateIcon{
+  font-size:65px;
+  margin-bottom:20px;
+}
+
+.rotateBox h2{
+  color:#e1c45c;
+}
 
 /* =========================
-   MOBİL KONTROLLER
+   MOBILE CONTROLS
 ========================= */
 
 #mobileControls{
-    position:fixed;
-    inset:0;
-
-    z-index:200;
-
-    display:none;
-
-    pointer-events:none;
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:none;
+  pointer-events:none;
+  overflow:hidden;
 }
 
+/* CAMERA AREA */
 
-/* =========================
-   SOL JOYSTICK
-========================= */
+#cameraZone{
+  position:absolute;
+  left:27%;
+  top:0;
+  width:43%;
+  height:76%;
+  pointer-events:auto;
+  touch-action:none;
+}
+
+/* JOYSTICK */
 
 #joystick{
-    position:absolute;
+  position:absolute;
+  left:24px;
+  bottom:24px;
 
-    left:
-        calc(
-            20px +
-            env(safe-area-inset-left)
-        );
+  width:145px;
+  height:145px;
 
-    bottom:
-        calc(
-            20px +
-            env(safe-area-inset-bottom)
-        );
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.4);
 
-    width:145px;
-    height:145px;
+  background:rgba(30,30,30,.42);
 
-    border-radius:50%;
-
-    background:
-        rgba(255,255,255,.10);
-
-    border:
-        2px solid
-        rgba(255,255,255,.25);
-
-    pointer-events:auto;
-
-    touch-action:none;
+  pointer-events:auto;
+  touch-action:none;
 }
 
 #joystick::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    width:5px;
-    height:5px;
-
-    background:
-        rgba(255,255,255,.3);
-
-    border-radius:50%;
+  content:"";
+  position:absolute;
+  inset:18px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
 }
 
 #joystickKnob{
-    position:absolute;
+  position:absolute;
 
-    left:50%;
-    top:50%;
+  left:50%;
+  top:50%;
 
-    width:65px;
-    height:65px;
+  width:65px;
+  height:65px;
 
-    transform:
-        translate(-50%,-50%);
+  margin-left:-32.5px;
+  margin-top:-32.5px;
 
-    border-radius:50%;
+  border-radius:50%;
 
-    background:
-        rgba(218,201,100,.85);
+  background:rgba(220,220,220,.65);
+  border:2px solid rgba(255,255,255,.7);
 
-    border:
-        2px solid
-        rgba(255,255,255,.5);
-
-    box-shadow:
-        0 4px 15px
-        rgba(0,0,0,.5);
-
-    pointer-events:none;
+  pointer-events:none;
 }
 
-
-/* =========================
-   KAMERA ALANI
-========================= */
-
-#cameraZone{
-    position:absolute;
-
-    left:27%;
-    top:0;
-
-    width:45%;
-    height:75%;
-
-    pointer-events:auto;
-
-    touch-action:none;
-
-    background:
-        transparent;
-}
-
-
-/* =========================
-   AKSİYON BUTONLARI
-========================= */
+/* ACTION BUTTONS */
 
 .mobileButton{
-    position:absolute;
+  position:absolute;
 
-    width:72px;
-    height:72px;
+  width:72px;
+  height:58px;
 
-    border-radius:50%;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.45);
 
-    border:
-        1px solid
-        rgba(255,255,255,.3);
+  background:rgba(15,15,15,.72);
+  color:white;
 
-    background:
-        rgba(15,15,15,.72);
+  font-size:12px;
+  font-weight:bold;
 
-    color:white;
+  pointer-events:auto;
+  touch-action:none;
 
-    font-size:12px;
-    font-weight:bold;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    pointer-events:auto;
-
-    touch-action:none;
-
-    box-shadow:
-        0 3px 15px
-        rgba(0,0,0,.5);
+  text-shadow:0 2px 3px #000;
 }
 
-.mobileButton:active,
-.mobileButton.active{
-
-    background:
-        rgba(210,190,80,.9);
-
-    color:#111;
-
-    transform:scale(.94);
+.mobileButton:active{
+  background:rgba(130,105,30,.85);
+  transform:scale(.94);
 }
-
-
-/* koş */
 
 #runButton{
-    right:
-        calc(
-            20px +
-            env(safe-area-inset-right)
-        );
-
-    bottom:
-        calc(
-            180px +
-            env(safe-area-inset-bottom)
-        );
+  right:18px;
+  bottom:20px;
+  width:82px;
+  height:65px;
 }
-
-
-/* fener */
 
 #flashButton{
-    right:
-        calc(
-            105px +
-            env(safe-area-inset-right)
-        );
-
-    bottom:
-        calc(
-            125px +
-            env(safe-area-inset-bottom)
-        );
+  right:112px;
+  bottom:20px;
 }
-
-
-/* etkileşim */
 
 #interactButton{
-    right:
-        calc(
-            20px +
-            env(safe-area-inset-right)
-        );
-
-    bottom:
-        calc(
-            95px +
-            env(safe-area-inset-bottom)
-        );
+  right:112px;
+  bottom:88px;
 }
-
-
-/* not */
 
 #noteButton{
-    right:
-        calc(
-            190px +
-            env(safe-area-inset-right)
-        );
-
-    bottom:
-        calc(
-            100px +
-            env(safe-area-inset-bottom)
-        );
+  right:18px;
+  bottom:93px;
 }
-
-
-/* ses */
 
 #soundButton{
-    right:
-        calc(
-            190px +
-            env(safe-area-inset-right)
-        );
-
-    bottom:
-        calc(
-            185px +
-            env(safe-area-inset-bottom)
-        );
+  right:18px;
+  bottom:166px;
 }
 
-
-/* kamera */
-
 #leftButton{
-    right:
-        calc(
-            280px +
-            env(safe-area-inset-right)
-        );
-
-    bottom:
-        calc(
-            190px +
-            env(safe-area-inset-bottom)
-        );
+  right:112px;
+  bottom:166px;
+  width:55px;
 }
 
 #rightButton{
-    right:
-        calc(
-            280px +
-            env(safe-area-inset-right)
-        );
-
-    bottom:
-        calc(
-            100px +
-            env(safe-area-inset-bottom)
-        );
+  right:50px;
+  bottom:166px;
+  width:55px;
 }
 
-
-/* küçük telefonlar */
+/* SMALL PHONES */
 
 @media(max-height:430px){
 
-    #joystick{
-        width:120px;
-        height:120px;
-    }
+  #joystick{
+    width:120px;
+    height:120px;
+    left:15px;
+    bottom:15px;
+  }
 
-    #joystickKnob{
-        width:55px;
-        height:55px;
-    }
+  #joystickKnob{
+    width:55px;
+    height:55px;
+    margin-left:-27.5px;
+    margin-top:-27.5px;
+  }
 
-    .mobileButton{
-        width:62px;
-        height:62px;
-        font-size:10px;
-    }
+  .mobileButton{
+    width:62px;
+    height:48px;
+    font-size:10px;
+    border-radius:11px;
+  }
 
-    #runButton{
-        bottom:155px;
-    }
+  #runButton{
+    width:72px;
+    height:54px;
+    right:12px;
+    bottom:12px;
+  }
 
-    #flashButton{
-        bottom:105px;
-        right:95px;
-    }
+  #flashButton{
+    right:92px;
+    bottom:12px;
+  }
 
-    #interactButton{
-        bottom:80px;
-    }
+  #interactButton{
+    right:92px;
+    bottom:68px;
+  }
 
-    #noteButton{
-        bottom:80px;
-        right:170px;
-    }
+  #noteButton{
+    right:12px;
+    bottom:70px;
+  }
 
-    #soundButton{
-        bottom:155px;
-        right:170px;
-    }
+  #soundButton{
+    right:12px;
+    bottom:128px;
+  }
 
-    #leftButton{
-        right:245px;
-        bottom:160px;
-    }
+  #leftButton{
+    right:92px;
+    bottom:128px;
+    width:45px;
+  }
 
-    #rightButton{
-        right:245px;
-        bottom:80px;
-    }
+  #rightButton{
+    right:42px;
+    bottom:128px;
+    width:45px;
+  }
 
+  #hud{
+    left:8px;
+    top:7px;
+    width:180px;
+  }
+
+  #message{
+    font-size:16px;
+  }
 }
 
-
 /* =========================
-   NOT
+   NOTE
 ========================= */
 
 #notePanel{
-    position:fixed;
-    inset:0;
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
 
-    z-index:700;
+  width:min(90%,420px);
 
-    display:none;
+  padding:25px;
 
-    align-items:center;
-    justify-content:center;
+  background:#17130b;
+  border:1px solid #c5a950;
 
-    background:
-        rgba(0,0,0,.8);
+  color:#eee;
 
-    padding:20px;
+  z-index:500;
+
+  display:none;
+
+  box-shadow:0 0 40px #000;
 }
 
-.note{
-    width:min(450px,90vw);
-
-    padding:25px;
-
-    background:#d8c98d;
-
-    color:#211e13;
-
-    border-radius:5px;
-
-    box-shadow:
-        0 20px 50px
-        #000;
-}
-
-.note h2{
-    margin-bottom:15px;
+#notePanel h2{
+  color:#e1c45c;
 }
 
 #closeNote{
-    margin-top:20px;
-
-    padding:12px 25px;
-
-    border:0;
-
-    background:#222;
-
-    color:white;
-
-    border-radius:5px;
+  margin-top:20px;
+  padding:10px 20px;
+  background:#111;
+  color:white;
+  border:1px solid #777;
 }
-
 
 /* =========================
-   KEYPAD
+   DEATH
 ========================= */
 
-#keypad{
-    position:fixed;
-    inset:0;
-
-    z-index:800;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    background:
-        rgba(0,0,0,.8);
+#deathScreen{
+  position:fixed;
+  inset:0;
+  z-index:1500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:#000;
+  color:#c22;
 }
 
-.keypadBox{
-    width:270px;
-
-    padding:20px;
-
-    background:#151515;
-
-    border-radius:10px;
-
-    border:
-        1px solid
-        #444;
+#deathScreen h1{
+  font-size:60px;
+  letter-spacing:8px;
 }
 
-#codeDisplay{
-    height:45px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    margin-bottom:12px;
-
-    background:#000;
-
-    color:white;
-
-    font-size:25px;
-
-    letter-spacing:7px;
+#restartButton{
+  padding:14px 30px;
+  background:#150000;
+  color:#f55;
+  border:1px solid #922;
 }
-
-.keyGrid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:7px;
-}
-
-.keyGrid button{
-    height:50px;
-
-    border:1px solid #444;
-
-    background:#292929;
-
-    color:white;
-
-    border-radius:5px;
-
-    font-size:18px;
-}
-
-
-/* =========================
-   SAKLANMA
-========================= */
-
-#hidden{
-    position:fixed;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    z-index:400;
-
-    display:none;
-
-    text-align:center;
-
-    color:white;
-
-    pointer-events:none;
-}
-
-#hidden strong{
-    display:block;
-
-    font-size:22px;
-
-    margin-bottom:8px;
-}
-
 
 /* =========================
    JUMPSCARE
 ========================= */
 
 #jumpscare{
-    position:fixed;
-    inset:0;
-
-    z-index:1500;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#000;
+  position:fixed;
+  inset:0;
+  z-index:1400;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:#000;
 }
 
-.face{
-    width:min(70vw,450px);
-
-    aspect-ratio:1;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 33% 38%,
-            white 0 5%,
-            black 6% 12%,
-            transparent 13%
-        ),
-        radial-gradient(
-            circle at 67% 38%,
-            white 0 5%,
-            black 6% 12%,
-            transparent 13%
-        ),
-        radial-gradient(
-            ellipse at 50% 72%,
-            black 0 20%,
-            transparent 21%
-        ),
-        #aaa;
-
-    filter:
-        contrast(1.7)
-        brightness(.7);
-
-    animation:
-        shake .07s infinite alternate;
+#entityFace{
+  width:190px;
+  height:260px;
+  border-radius:45%;
+  background:#ddd;
+  position:relative;
+  box-shadow:0 0 80px #fff;
 }
 
-@keyframes shake{
-
-    from{
-        transform:
-            scale(1)
-            rotate(-2deg);
-    }
-
-    to{
-        transform:
-            scale(1.1)
-            rotate(2deg);
-    }
-
+.eye{
+  position:absolute;
+  top:80px;
+  width:35px;
+  height:55px;
+  background:#000;
+  border-radius:50%;
 }
 
-.scareText{
-    position:absolute;
+.eye.left{left:35px;}
+.eye.right{right:35px;}
 
-    bottom:10%;
-
-    font-size:
-        clamp(
-            25px,
-            7vw,
-            60px
-        );
-
-    color:white;
-
-    font-weight:bold;
+.mouth{
+  position:absolute;
+  left:50%;
+  bottom:45px;
+  transform:translateX(-50%);
+  width:90px;
+  height:20px;
+  background:#000;
+  border-radius:50%;
 }
-
-
-/* =========================
-   ÖLÜM
-========================= */
-
-#dead{
-    position:fixed;
-    inset:0;
-
-    z-index:1400;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#000;
-
-    color:white;
-
-    text-align:center;
-}
-
-#dead h1{
-    font-size:60px;
-
-    letter-spacing:8px;
-}
-
-#restart{
-    margin-top:20px;
-
-    padding:14px 30px;
-
-    border:0;
-
-    border-radius:6px;
-
-    background:white;
-
-    color:#111;
-}
-
-
-/* =========================
-   PC KONTROLLER
-========================= */
-
-#pcControls{
-    position:fixed;
-
-    right:10px;
-    top:10px;
-
-    z-index:90;
-
-    color:#aaa;
-
-    background:
-        rgba(0,0,0,.5);
-
-    padding:10px;
-
-    border-radius:8px;
-
-    font-size:11px;
-
-    line-height:1.5;
-
-    pointer-events:none;
-}
-
-@media(max-width:900px){
-
-    #pcControls{
-        display:none;
-    }
-
-}
-
 </style>
 </head>
 
-
 <body>
 
-
-<div id="game"></div>
-
-
-<!-- BAŞLANGIÇ -->
-
 <div id="startScreen">
+  <div class="startBox">
+    <h1>BACKROOMS</h1>
+    <p>
+      LEVEL 0<br>
+      Buradan çıkmanın bir yolunu bul.
+    </p>
 
-    <div class="startBox">
-
-        <h1>BACKROOMS</h1>
-
-        <p>
-            Burada yalnız değilsin.
-        </p>
-
-        <p>
-            Telefon için oyunu
-            <b>yatay</b> kullan.
-        </p>
-
-        <button id="startButton">
-            OYUNA BAŞLA
-        </button>
-
-    </div>
-
+    <button id="startButton">
+      OYUNA BAŞLA
+    </button>
+  </div>
 </div>
-
-
-<!-- YATAY UYARI -->
 
 <div id="rotateScreen">
-
-    <div class="rotateBox">
-
-        <div class="rotateIcon">
-            📱
-        </div>
-
-        <h2>
-            TELEFONU YATAY ÇEVİR
-        </h2>
-
-        <p>
-            Oyunu oynayabilmek için
-            telefonunu yatay çevir.
-        </p>
-
-    </div>
-
+  <div class="rotateBox">
+    <div class="rotateIcon">📱↔️</div>
+    <h2>TELEFONU YATAY ÇEVİR</h2>
+    <p>
+      Oyunu oynayabilmek için telefonu yatay konuma getir.
+    </p>
+  </div>
 </div>
-
-
-<!-- HUD -->
 
 <div id="hud">
 
-    <div class="hudTitle">
-        LEVEL <span id="level">0</span>
-    </div>
+  <div>CAN</div>
+  <div class="bar">
+    <div id="healthBar" class="barInner"></div>
+  </div>
 
-    <div class="stat">
+  <div>DAYANIKLILIK</div>
+  <div class="bar">
+    <div id="staminaBar" class="barInner"></div>
+  </div>
 
-        ❤️
+  <div>FENER</div>
+  <div class="bar">
+    <div id="batteryBar" class="barInner"></div>
+  </div>
 
-        <div class="bar">
-            <div
-                id="healthFill"
-                class="fill">
-            </div>
-        </div>
-
-        <span id="health">
-            100
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        ⚡
-
-        <div class="bar">
-            <div
-                id="staminaFill"
-                class="fill">
-            </div>
-        </div>
-
-        <span id="stamina">
-            100
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        🔋
-
-        <div class="bar">
-            <div
-                id="batteryFill"
-                class="fill">
-            </div>
-        </div>
-
-        <span id="battery">
-            100
-        </span>
-
-    </div>
-
-
-    <div id="objective">
-        Anahtarı bul.
-    </div>
+  <div id="levelText">
+    LEVEL 0
+  </div>
 
 </div>
-
-
-<!-- PC -->
-
-<div id="pcControls">
-
-    <b>PC</b><br>
-
-    WASD → Hareket<br>
-
-    SHIFT → Koş<br>
-
-    Mouse → Kamera<br>
-
-    F → Fener<br>
-
-    E → Etkileşim<br>
-
-    Q → Not
-
-</div>
-
-
-<!-- CROSSHAIR -->
-
-<div id="crosshair"></div>
-
-
-<!-- MESAJ -->
 
 <div id="message"></div>
 
+<div id="crosshair"></div>
 
-<!-- ETKİLEŞİM -->
-
-<div id="interactionHint"></div>
-
-
-<!-- MOBİL -->
+<!-- =========================
+     MOBILE
+========================= -->
 
 <div id="mobileControls">
 
+  <div id="cameraZone"></div>
 
-    <!-- GERÇEK KAMERA ALANI -->
+  <div id="joystick">
+    <div id="joystickKnob"></div>
+  </div>
 
-    <div id="cameraZone"></div>
+  <button id="runButton" class="mobileButton">
+    🏃<br>KOŞ
+  </button>
 
+  <button id="flashButton" class="mobileButton">
+    🔦<br>FENER
+  </button>
 
-    <!-- GERÇEK JOYSTICK -->
+  <button id="interactButton" class="mobileButton">
+    ✋<br>ETKİLEŞ
+  </button>
 
-    <div id="joystick">
+  <button id="noteButton" class="mobileButton">
+    📜<br>NOT
+  </button>
 
-        <div id="joystickKnob"></div>
+  <button id="soundButton" class="mobileButton">
+    🔊<br>SES
+  </button>
 
-    </div>
+  <button id="leftButton" class="mobileButton">
+    ◀
+  </button>
 
-
-    <!-- KOŞ -->
-
-    <button
-        id="runButton"
-        class="mobileButton">
-
-        🏃
-        <br>
-        KOŞ
-
-    </button>
-
-
-    <!-- FENER -->
-
-    <button
-        id="flashButton"
-        class="mobileButton">
-
-        🔦
-        <br>
-        FENER
-
-    </button>
-
-
-    <!-- ETKİLEŞ -->
-
-    <button
-        id="interactButton"
-        class="mobileButton">
-
-        ✋
-        <br>
-        ETKİLEŞ
-
-    </button>
-
-
-    <!-- NOT -->
-
-    <button
-        id="noteButton"
-        class="mobileButton">
-
-        📜
-        <br>
-        NOT
-
-    </button>
-
-
-    <!-- SES -->
-
-    <button
-        id="soundButton"
-        class="mobileButton">
-
-        🔊
-        <br>
-        SES
-
-    </button>
-
-
-    <!-- KAMERA -->
-
-    <button
-        id="leftButton"
-        class="mobileButton">
-
-        ◀
-
-    </button>
-
-
-    <button
-        id="rightButton"
-        class="mobileButton">
-
-        ▶
-
-    </button>
-
+  <button id="rightButton" class="mobileButton">
+    ▶
+  </button>
 
 </div>
 
-
-<!-- NOT -->
+<!-- NOTE -->
 
 <div id="notePanel">
 
-    <div class="note">
+  <h2>📜 NOT</h2>
 
-        <h2 id="noteTitle">
-            NOT
-        </h2>
+  <div id="noteText"></div>
 
-        <div id="noteText"></div>
-
-        <button id="closeNote">
-            KAPAT
-        </button>
-
-    </div>
+  <button id="closeNote">
+    KAPAT
+  </button>
 
 </div>
-
-
-<!-- KEYPAD -->
-
-<div id="keypad">
-
-    <div class="keypadBox">
-
-        <h3>
-            ŞİFRE
-        </h3>
-
-        <div id="codeDisplay"></div>
-
-        <div class="keyGrid">
-
-            <button data-key="1">1</button>
-            <button data-key="2">2</button>
-            <button data-key="3">3</button>
-
-            <button data-key="4">4</button>
-            <button data-key="5">5</button>
-            <button data-key="6">6</button>
-
-            <button data-key="7">7</button>
-            <button data-key="8">8</button>
-            <button data-key="9">9</button>
-
-            <button data-key="clear">
-                C
-            </button>
-
-            <button data-key="0">
-                0
-            </button>
-
-            <button data-key="enter">
-                OK
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SAKLANMA -->
-
-<div id="hidden">
-
-    <strong>
-        SAKLANIYORSUN
-    </strong>
-
-    Çıkmak için
-    ETKİLEŞ butonuna bas.
-
-</div>
-
 
 <!-- JUMPSCARE -->
 
 <div id="jumpscare">
 
-    <div class="face"></div>
+  <div id="entityFace">
 
-    <div class="scareText">
-        ARKANA BAKMA
-    </div>
+    <div class="eye left"></div>
+    <div class="eye right"></div>
 
-</div>
+    <div class="mouth"></div>
 
-
-<!-- ÖLÜM -->
-
-<div id="dead">
-
-    <div>
-
-        <h1>
-            ÖLDÜN
-        </h1>
-
-        <p>
-            Entity seni buldu.
-        </p>
-
-        <button id="restart">
-            TEKRAR DENE
-        </button>
-
-    </div>
+  </div>
 
 </div>
 
+<!-- DEATH -->
+
+<div id="deathScreen">
+
+  <div>
+
+    <h1>YAKALANDIN</h1>
+
+    <button id="restartButton">
+      TEKRAR DENE
+    </button>
+
+  </div>
+
+</div>
 
 <script type="module">
 
-
-/* =========================================================
-   THREE
-========================================================= */
-
 import * as THREE from
-'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
 
+/* =====================================================
+   BASIC
+===================================================== */
 
-/* =========================================================
-   DEĞİŞKENLER
-========================================================= */
+const $ = id => document.getElementById(id);
 
 let scene;
 let camera;
 let renderer;
+
 let clock;
 
-let flashlight;
-
-let entity;
-
-let level = 0;
-
-let walls = [];
-let doors = [];
-let pickups = [];
-let notes = [];
-let hidingSpots = [];
-let panels = [];
-
-let audio = null;
-let master = null;
-
-let flashlightOn = false;
-
 let gameStarted = false;
+
+let audioContext = null;
+
+let flashlight;
+let flashlightOn = false;
 
 let cameraYaw = 0;
 let cameraPitch = 0;
 
 let sensitivity =
-    Number(
-        localStorage.getItem(
-            "cameraSensitivity"
-        )
-    ) || 1;
+  Number(localStorage.getItem("cameraSensitivity")) || 1;
 
+let level = 0;
 
-/* =========================================================
-   OYUNCU
-========================================================= */
-
-const player = {
-
-    health:100,
-
-    stamina:100,
-
-    battery:100,
-
-    speed:3.2,
-
-    runSpeed:5.5,
-
-    running:false,
-
-    hidden:false,
-
-    hasKey:false,
-
-    hasFuse:false,
-
-    code:""
-
-};
-
-
-/* =========================================================
-   KLAVYE
-========================================================= */
-
-const keys = {};
-
-
-/* =========================================================
-   JOYSTICK
-========================================================= */
-
-const joy = {
-
-    active:false,
-
-    id:null,
-
-    x:0,
-
-    y:0
-
-};
-
-
-/* =========================================================
-   KAMERA DOKUNMATİK
-========================================================= */
-
-const touchLook = {
-
-    active:false,
-
-    id:null,
-
-    x:0,
-
-    y:0
-
-};
-
-
-/* =========================================================
-   TURN
-========================================================= */
-
-let turnLeft = false;
-let turnRight = false;
-
-
-/* =========================================================
-   FOOTSTEP
-========================================================= */
+let health = 100;
+let stamina = 100;
+let battery = 100;
 
 let footstepTimer = null;
+let currentFootstepMode = null;
 
+let entity = null;
 
-/* =========================================================
-   DOM
-========================================================= */
+let doors = [];
 
-const $ = id =>
-    document.getElementById(id);
+let objects = [];
 
+let noteObjects = [];
 
-/* =========================================================
+let currentNote = null;
+
+let player = {
+
+  running:false,
+  hidden:false
+
+};
+
+let joy = {
+
+  x:0,
+  y:0
+
+};
+
+let keys = {
+
+  w:false,
+  a:false,
+  s:false,
+  d:false,
+  shift:false
+
+};
+
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
 $("startButton").addEventListener(
-    "click",
-    async () => {
+  "click",
+  async () => {
 
-        $("startScreen").style.display =
-            "none";
+    $("startScreen").style.display = "none";
 
-        gameStarted = true;
+    gameStarted = true;
 
-        await fullscreen();
+    await requestFullscreen();
 
-        initAudio();
+    initAudio();
 
-        createGame();
+    createGame();
 
-        setupKeyboard();
+    setupKeyboard();
 
-        setupMobile();
+    setupMobile();
 
-        buildLevel(0);
+    updateMobileLayout();
 
-        showMessage(
-            "LEVEL 0 — ANAHTARI BUL",
-            3000
-        );
+    buildLevel(0);
 
-    }
+    showMessage(
+      "LEVEL 0 — ANAHTARI BUL",
+      3000
+    );
+
+  }
 );
 
-
-/* =========================================================
+/* =====================================================
    FULLSCREEN
-========================================================= */
+===================================================== */
 
-async function fullscreen(){
+async function requestFullscreen(){
 
-    try{
+  try{
 
-        if(
-            document.documentElement
-                .requestFullscreen
-        ){
+    if(document.documentElement.requestFullscreen){
 
-            await document
-                .documentElement
-                .requestFullscreen();
-
-        }
-
-    }catch(e){}
-
-
-    try{
-
-        if(
-            screen.orientation &&
-            screen.orientation.lock
-        ){
-
-            await screen.orientation
-                .lock("landscape");
-
-        }
-
-    }catch(e){}
-
-}
-
-
-/* =========================================================
-   OYUN OLUŞTUR
-========================================================= */
-
-function createGame(){
-
-    scene =
-        new THREE.Scene();
-
-    scene.background =
-        new THREE.Color(
-            0x18160c
-        );
-
-    scene.fog =
-        new THREE.Fog(
-            0x18160c,
-            2,
-            35
-        );
-
-
-    camera =
-        new THREE.PerspectiveCamera(
-            72,
-            innerWidth / innerHeight,
-            .05,
-            100
-        );
-
-    camera.position.set(
-        0,
-        1.65,
-        7
-    );
-
-
-    renderer =
-        new THREE.WebGLRenderer({
-            antialias:true,
-            powerPreference:
-                "high-performance"
-        });
-
-
-    renderer.setPixelRatio(
-        Math.min(
-            devicePixelRatio,
-            1.5
-        )
-    );
-
-
-    renderer.setSize(
-        innerWidth,
-        innerHeight
-    );
-
-
-    renderer.outputColorSpace =
-        THREE.SRGBColorSpace;
-
-
-    $("game")
-        .appendChild(
-            renderer.domElement
-        );
-
-
-    clock =
-        new THREE.Clock();
-
-
-    /* ışık */
-
-    const ambient =
-        new THREE.HemisphereLight(
-            0xffefbd,
-            0x111111,
-            .5
-        );
-
-    scene.add(ambient);
-
-
-    const lamp =
-        new THREE.PointLight(
-            0xffe9a5,
-            1.2,
-            10
-        );
-
-    lamp.position.set(
-        0,
-        2.8,
-        0
-    );
-
-    scene.add(lamp);
-
-
-    createFlashlight();
-
-
-    window.addEventListener(
-        "resize",
-        resize
-    );
-
-
-    animate();
-
-}
-
-
-/* =========================================================
-   FENER
-========================================================= */
-
-function createFlashlight(){
-
-    flashlight =
-        new THREE.SpotLight(
-            0xffffff,
-            4,
-            25,
-            Math.PI / 8,
-            .55,
-            1.5
-        );
-
-
-    flashlight.position.set(
-        0,
-        0,
-        0
-    );
-
-
-    flashlight.target.position.set(
-        0,
-        0,
-        -6
-    );
-
-
-    camera.add(
-        flashlight
-    );
-
-    camera.add(
-        flashlight.target
-    );
-
-
-    flashlight.visible =
-        false;
-
-}
-
-
-/* =========================================================
-   LEVEL TEMİZLE
-========================================================= */
-
-function clearLevel(){
-
-    walls.forEach(
-        x => scene.remove(x)
-    );
-
-    doors.forEach(
-        x => scene.remove(
-            x.group
-        )
-    );
-
-    pickups.forEach(
-        x => scene.remove(
-            x.mesh
-        )
-    );
-
-    notes.forEach(
-        x => scene.remove(
-            x.mesh
-        )
-    );
-
-    hidingSpots.forEach(
-        x => scene.remove(
-            x.mesh
-        )
-    );
-
-    panels.forEach(
-        x => scene.remove(
-            x.mesh
-        )
-    );
-
-
-    walls = [];
-    doors = [];
-    pickups = [];
-    notes = [];
-    hidingSpots = [];
-    panels = [];
-
-
-    if(entity){
-
-        scene.remove(
-            entity.group
-        );
-
-        entity = null;
+      await document.documentElement.requestFullscreen();
 
     }
 
-}
+  }catch(e){}
 
+  try{
 
-/* =========================================================
-   LEVEL
-========================================================= */
+    if(screen.orientation &&
+       screen.orientation.lock){
 
-function buildLevel(number){
+      await screen.orientation.lock("landscape");
 
-    clearLevel();
+    }
 
-    level = number;
-
-    player.hasKey = false;
-    player.hasFuse = false;
-    player.code = "";
-
-    player.hidden = false;
-
-    $("hidden").style.display =
-        "none";
-
-
-    camera.position.set(
-        0,
-        1.65,
-        7
-    );
-
-    cameraYaw = 0;
-    cameraPitch = 0;
-
-
-    if(level === 0)
-        level0();
-
-    if(level === 1)
-        level1();
-
-    if(level === 2)
-        level2();
-
-
-    createEntity();
-
-    updateHUD();
+  }catch(e){}
 
 }
 
-
-/* =========================================================
-   FLOOR
-========================================================= */
-
-function floor(
-    width,
-    depth
-){
-
-    const geo =
-        new THREE.PlaneGeometry(
-            width,
-            depth
-        );
-
-
-    const mat =
-        new THREE.MeshStandardMaterial({
-            color:0x706b4c,
-            roughness:1
-        });
-
-
-    const mesh =
-        new THREE.Mesh(
-            geo,
-            mat
-        );
-
-
-    mesh.rotation.x =
-        -Math.PI / 2;
-
-
-    scene.add(mesh);
-
-}
-
-
-/* =========================================================
-   WALL
-========================================================= */
-
-function wall(
-    x,
-    z,
-    width,
-    depth
-){
-
-    const geo =
-        new THREE.BoxGeometry(
-            width,
-            3,
-            depth
-        );
-
-
-    const mat =
-        new THREE.MeshStandardMaterial({
-            color:0xb9ad68,
-            roughness:1
-        });
-
-
-    const mesh =
-        new THREE.Mesh(
-            geo,
-            mat
-        );
-
-
-    mesh.position.set(
-        x,
-        1.5,
-        z
-    );
-
-
-    scene.add(mesh);
-
-    walls.push(mesh);
-
-}
-
-
-/* =========================================================
-   CEILING
-========================================================= */
-
-function ceiling(
-    width,
-    depth
-){
-
-    const geo =
-        new THREE.BoxGeometry(
-            width,
-            .1,
-            depth
-        );
-
-
-    const mat =
-        new THREE.MeshStandardMaterial({
-            color:0xd0c37f
-        });
-
-
-    const mesh =
-        new THREE.Mesh(
-            geo,
-            mat
-        );
-
-
-    mesh.position.y = 3;
-
-
-    scene.add(mesh);
-
-}
-
-
-/* =========================================================
-   DOOR
-========================================================= */
-
-function door(
-    x,
-    z,
-    required
-){
-
-    const group =
-        new THREE.Group();
-
-
-    group.position.set(
-        x,
-        0,
-        z
-    );
-
-
-    const pivot =
-        new THREE.Group();
-
-
-    group.add(pivot);
-
-
-    const mesh =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                1.8,
-                2.5,
-                .18
-            ),
-
-            new THREE.MeshStandardMaterial({
-                color:0x403825
-            })
-
-        );
-
-
-    mesh.position.set(
-        .9,
-        1.25,
-        0
-    );
-
-
-    pivot.add(mesh);
-
-    scene.add(group);
-
-
-    const d = {
-
-        group,
-
-        pivot,
-
-        mesh,
-
-        required,
-
-        open:false,
-
-        progress:0,
-
-        exit:true
-
-    };
-
-
-    doors.push(d);
-
-}
-
-
-/* =========================================================
-   LEVEL 0
-========================================================= */
-
-function level0(){
-
-    floor(
-        32,
-        32
-    );
-
-    ceiling(
-        32,
-        32
-    );
-
-
-    wall(
-        0,
-        -16,
-        32,
-        .4
-    );
-
-    wall(
-        0,
-        16,
-        32,
-        .4
-    );
-
-    wall(
-        -16,
-        0,
-        .4,
-        32
-    );
-
-    wall(
-        16,
-        0,
-        .4,
-        32
-    );
-
-
-    wall(
-        -6,
-        -7,
-        13,
-        .4
-    );
-
-    wall(
-        7,
-        -1,
-        .4,
-        12
-    );
-
-    wall(
-        -4,
-        4,
-        10,
-        .4
-    );
-
-    wall(
-        -10,
-        9,
-        .4,
-        10
-    );
-
-    wall(
-        4,
-        10,
-        13,
-        .4
-    );
-
-
-    door(
-        0,
-        -15.7,
-        "key"
-    );
-
-
-    pickup(
-        11,
-        11,
-        "key"
-    );
-
-
-    pickup(
-        -10,
-        -10,
-        "battery"
-    );
-
-
-    pickup(
-        10,
-        -5,
-        "medkit"
-    );
-
-
-    note(
-        -8,
-        -11,
-        "LEVEL 0",
-        "Anahtarı bul.<br><br>Çıkış kapısına ulaş."
-    );
-
-
-    hiding(
-        -8,
-        12
-    );
-
-    hiding(
-        8,
-        12
-    );
-
-
-    $("objective").textContent =
-        "Anahtarı bul ve çıkışa git.";
-
-}
-
-
-/* =========================================================
-   LEVEL 1
-========================================================= */
-
-function level1(){
-
-    floor(
-        34,
-        34
-    );
-
-    ceiling(
-        34,
-        34
-    );
-
-
-    wall(
-        0,
-        -17,
-        34,
-        .4
-    );
-
-    wall(
-        0,
-        17,
-        34,
-        .4
-    );
-
-    wall(
-        -17,
-        0,
-        .4,
-        34
-    );
-
-    wall(
-        17,
-        0,
-        .4,
-        34
-    );
-
-
-    wall(
-        -5,
-        -6,
-        20,
-        .4
-    );
-
-    wall(
-        7,
-        3,
-        .4,
-        15
-    );
-
-    wall(
-        -5,
-        10,
-        18,
-        .4
-    );
-
-
-    door(
-        0,
-        -16.7,
-        "0415"
-    );
-
-
-    note(
-        11,
-        11,
-        "GİZLİ NOT",
-        "Kapı şifresi:<br><br><b>0415</b>"
-    );
-
-
-    panel(
-        11,
-        -11,
-        "0415"
-    );
-
-
-    pickup(
-        -12,
-        12,
-        "battery"
-    );
-
-
-    hiding(
-        -12,
-        -5
-    );
-
-
-    hiding(
-        9,
-        8
-    );
-
-
-    $("objective").textContent =
-        "Notu bul ve 0415 kodunu kullan.";
-
-}
-
-
-/* =========================================================
-   LEVEL 2
-========================================================= */
-
-function level2(){
-
-    floor(
-        38,
-        38
-    );
-
-    ceiling(
-        38,
-        38
-    );
-
-
-    wall(
-        0,
-        -19,
-        38,
-        .4
-    );
-
-    wall(
-        0,
-        19,
-        38,
-        .4
-    );
-
-    wall(
-        -19,
-        0,
-        .4,
-        38
-    );
-
-    wall(
-        19,
-        0,
-        .4,
-        38
-    );
-
-
-    wall(
-        -7,
-        -8,
-        18,
-        .4
-    );
-
-    wall(
-        7,
-        0,
-        .4,
-        14
-    );
-
-    wall(
-        -6,
-        7,
-        15,
-        .4
-    );
-
-
-    door(
-        0,
-        -18.7,
-        "7392"
-    );
-
-
-    pickup(
-        12,
-        12,
-        "fuse"
-    );
-
-
-    note(
-        -12,
-        12,
-        "SON NOT",
-        "Sigortayı bul.<br><br>Son kapı şifresi:<br><br><b>7392</b>"
-    );
-
-
-    panel(
-        11,
-        -12,
-        "7392"
-    );
-
-
-    hiding(
-        -13,
-        5
-    );
-
-
-    hiding(
-        10,
-        7
-    );
-
-
-    $("objective").textContent =
-        "Sigortayı bul ve 7392 kodunu kullan.";
-
-}
-
-
-/* =========================================================
-   PICKUP
-========================================================= */
-
-function pickup(
-    x,
-    z,
-    type
-){
-
-    const colors = {
-
-        key:0xffff00,
-
-        battery:0xeeeeee,
-
-        medkit:0xff3333,
-
-        fuse:0xff7700
-
-    };
-
-
-    const mesh =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                .4,
-                .4,
-                .4
-            ),
-
-            new THREE.MeshStandardMaterial({
-                color:
-                    colors[type] ||
-                    0xffffff,
-
-                emissive:
-                    colors[type] ||
-                    0xffffff,
-
-                emissiveIntensity:.35
-            })
-
-        );
-
-
-    mesh.position.set(
-        x,
-        .5,
-        z
-    );
-
-
-    scene.add(mesh);
-
-
-    pickups.push({
-
-        mesh,
-
-        type,
-
-        collected:false
-
-    });
-
-}
-
-
-/* =========================================================
-   NOT
-========================================================= */
-
-function note(
-    x,
-    z,
-    title,
-    text
-){
-
-    const mesh =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                .45,
-                .03,
-                .6
-            ),
-
-            new THREE.MeshStandardMaterial({
-                color:0xd8c88b
-            })
-
-        );
-
-
-    mesh.position.set(
-        x,
-        .45,
-        z
-    );
-
-
-    scene.add(mesh);
-
-
-    notes.push({
-
-        mesh,
-
-        title,
-
-        text
-
-    });
-
-}
-
-
-/* =========================================================
-   PANEL
-========================================================= */
-
-function panel(
-    x,
-    z,
-    code
-){
-
-    const mesh =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                .7,
-                1,
-                .15
-            ),
-
-            new THREE.MeshStandardMaterial({
-                color:0x333333
-            })
-
-        );
-
-
-    mesh.position.set(
-        x,
-        1.2,
-        z
-    );
-
-
-    scene.add(mesh);
-
-
-    panels.push({
-
-        mesh,
-
-        code
-
-    });
-
-}
-
-
-/* =========================================================
-   SAKLANMA
-========================================================= */
-
-function hiding(
-    x,
-    z
-){
-
-    const mesh =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                1.5,
-                2.5,
-                .8
-            ),
-
-            new THREE.MeshStandardMaterial({
-                color:0x29251a
-            })
-
-        );
-
-
-    mesh.position.set(
-        x,
-        1.25,
-        z
-    );
-
-
-    scene.add(mesh);
-
-
-    hidingSpots.push({
-
-        mesh
-
-    });
-
-}
-
-
-/* =========================================================
-   ENTITY
-========================================================= */
-
-function createEntity(){
-
-    const group =
-        new THREE.Group();
-
-
-    const body =
-        new THREE.Mesh(
-
-            new THREE.BoxGeometry(
-                .75,
-                1.8,
-                .55
-            ),
-
-            new THREE.MeshStandardMaterial({
-                color:0x050505
-            })
-
-        );
-
-
-    body.position.y =
-        .9;
-
-
-    group.add(body);
-
-
-    const head =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                .42,
-                16,
-                16
-            ),
-
-            new THREE.MeshStandardMaterial({
-                color:0x111111
-            })
-
-        );
-
-
-    head.position.y =
-        2;
-
-
-    group.add(head);
-
-
-    const eyeMaterial =
-        new THREE.MeshBasicMaterial({
-            color:0xff0000
-        });
-
-
-    const eye1 =
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                .06,
-                8,
-                8
-            ),
-            eyeMaterial
-        );
-
-
-    const eye2 =
-        eye1.clone();
-
-
-    eye1.position.set(
-        -.14,
-        2,
-        -.37
-    );
-
-
-    eye2.position.set(
-        .14,
-        2,
-        -.37
-    );
-
-
-    group.add(
-        eye1,
-        eye2
-    );
-
-
-    group.position.set(
-        -11,
-        0,
-        -11
-    );
-
-
-    scene.add(group);
-
-
-    entity = {
-
-        group,
-
-        speed:1.7,
-
-        lastSeen:null,
-
-        lost:0,
-
-        damageCooldown:0,
-
-        scareCooldown:0
-
-    };
-
-}
-
-
-/* =========================================================
-   ENTITY GÖRÜŞ
-========================================================= */
-
-function canEntitySeePlayer(){
-
-    if(
-        !entity ||
-        player.hidden
-    )
-        return false;
-
-
-    const origin =
-        entity.group.position
-        .clone();
-
-
-    origin.y = 1.4;
-
-
-    const target =
-        camera.position
-        .clone();
-
-
-    const direction =
-        target.clone()
-        .sub(origin);
-
-
-    const distance =
-        direction.length();
-
-
-    if(distance > 13)
-        return false;
-
-
-    direction.normalize();
-
-
-    const forward =
-        new THREE.Vector3(
-            0,
-            0,
-            -1
-        );
-
-
-    forward.applyQuaternion(
-        entity.group.quaternion
-    );
-
-
-    forward.y = 0;
-
-    forward.normalize();
-
-
-    const angle =
-        forward.angleTo(
-            direction
-        );
-
-
-    if(
-        angle >
-        Math.PI * .65 / 2
-    )
-        return false;
-
-
-    const ray =
-        new THREE.Raycaster(
-            origin,
-            direction,
-            0,
-            distance
-        );
-
-
-    const hits =
-        ray.intersectObjects(
-            walls,
-            false
-        );
-
-
-    return hits.length === 0;
-
-}
-
-
-/* =========================================================
-   ENTITY UPDATE
-========================================================= */
-
-function updateEntity(dt){
-
-    if(!entity)
-        return;
-
-
-    if(player.hidden)
-        return;
-
-
-    const sees =
-        canEntitySeePlayer();
-
-
-    if(sees){
-
-        entity.lastSeen =
-            camera.position
-            .clone();
-
-        entity.lastSeen.y = 0;
-
-        entity.lost = 3;
-
-    }else{
-
-        entity.lost -= dt;
-
-    }
-
-
-    if(
-        !sees &&
-        entity.lost <= 0
-    )
-        return;
-
-
-    if(!entity.lastSeen)
-        return;
-
-
-    const direction =
-        entity.lastSeen
-        .clone()
-        .sub(
-            entity.group.position
-        );
-
-
-    direction.y = 0;
-
-
-    const distance =
-        direction.length();
-
-
-    if(distance < .2)
-        return;
-
-
-    direction.normalize();
-
-
-    const next =
-        entity.group
-        .position
-        .clone();
-
-
-    next.addScaledVector(
-        direction,
-        entity.speed * dt
-    );
-
-
-    if(
-        !collision(
-            next.x,
-            next.z,
-            .35
-        )
-    ){
-
-        entity.group.position
-            .copy(next);
-
-    }
-
-
-    entity.group.rotation.y =
-        Math.atan2(
-            direction.x,
-            direction.z
-        );
-
-
-    if(distance < 1){
-
-        player.health -=
-            25 * dt;
-
-        if(
-            entity.scareCooldown <= 0
-        ){
-
-            jumpscare();
-
-            entity.scareCooldown =
-                7;
-
-        }
-
-    }
-
-
-    entity.scareCooldown -= dt;
-
-}
-
-
-/* =========================================================
-   ÇARPIŞMA
-========================================================= */
-
-function collision(
-    x,
-    z,
-    radius
-){
-
-    for(const w of walls){
-
-        const box =
-            new THREE.Box3()
-            .setFromObject(w);
-
-
-        if(
-
-            x + radius >
-                box.min.x &&
-
-            x - radius <
-                box.max.x &&
-
-            z + radius >
-                box.min.z &&
-
-            z - radius <
-                box.max.z
-
-        ){
-
-            return true;
-
-        }
-
-    }
-
-
-    for(const d of doors){
-
-        if(
-            d.progress > .8
-        )
-            continue;
-
-
-        const box =
-            new THREE.Box3()
-            .setFromObject(
-                d.mesh
-            );
-
-
-        if(
-
-            x + radius >
-                box.min.x &&
-
-            x - radius <
-                box.max.x &&
-
-            z + radius >
-                box.min.z &&
-
-            z - radius <
-                box.max.z
-
-        ){
-
-            return true;
-
-        }
-
-    }
-
-
-    return false;
-
-}
-
-
-/* =========================================================
-   OYUNCU HAREKET
-========================================================= */
-
-function updatePlayer(dt){
-
-    if(!gameStarted)
-        return;
-
-
-    if(player.health <= 0){
-
-        die();
-
-        return;
-
-    }
-
-
-    let x = 0;
-    let y = 0;
-
-
-    if(keys["KeyA"])
-        x -= 1;
-
-    if(keys["KeyD"])
-        x += 1;
-
-    if(keys["KeyW"])
-        y += 1;
-
-    if(keys["KeyS"])
-        y -= 1;
-
-
-    x += joy.x;
-    y += joy.y;
-
-
-    const len =
-        Math.hypot(x,y);
-
-
-    if(len > 1){
-
-        x /= len;
-        y /= len;
-
-    }
-
-
-    const moving =
-        Math.hypot(x,y) > .08;
-
-
-    const running =
-        player.running &&
-        moving &&
-        player.stamina > 0;
-
-
-    if(running){
-
-        player.stamina -=
-            38 * dt;
-
-    }else{
-
-        player.stamina +=
-            25 * dt;
-
-    }
-
-
-    player.stamina =
-        THREE.MathUtils.clamp(
-            player.stamina,
-            0,
-            100
-        );
-
-
-    const speed =
-        running
-        ? player.runSpeed
-        : player.speed;
-
-
-    if(moving){
-
-        const forward =
-            new THREE.Vector3(
-                0,
-                0,
-                -1
-            );
-
-
-        forward.applyAxisAngle(
-            new THREE.Vector3(
-                0,
-                1,
-                0
-            ),
-            cameraYaw
-        );
-
-
-        const right =
-            new THREE.Vector3(
-                1,
-                0,
-                0
-            );
-
-
-        right.applyAxisAngle(
-            new THREE.Vector3(
-                0,
-                1,
-                0
-            ),
-            cameraYaw
-        );
-
-
-        const movement =
-            new THREE.Vector3();
-
-
-        movement
-            .addScaledVector(
-                forward,
-                y
-            )
-            .addScaledVector(
-                right,
-                x
-            );
-
-
-        movement.normalize();
-
-
-        movement.multiplyScalar(
-            speed * dt
-        );
-
-
-        move(
-            movement.x,
-            movement.z
-        );
-
-
-        footsteps(
-            running
-        );
-
-    }else{
-
-        stopFootsteps();
-
-    }
-
-
-    camera.rotation.order =
-        "YXZ";
-
-
-    camera.rotation.y =
-        cameraYaw;
-
-
-    camera.rotation.x =
-        cameraPitch;
-
-
-    if(
-        flashlightOn &&
-        player.battery > 0
-    ){
-
-        player.battery -=
-            5 * dt;
-
-
-        if(
-            player.battery <= 0
-        ){
-
-            player.battery = 0;
-
-            flashlightOn = false;
-
-            flashlight.visible =
-                false;
-
-        }
-
-    }
-
-
-    updatePickups();
-
-    updateDoors(dt);
-
-    updateInteractionHint();
-
-    checkExit();
-
-}
-
-
-/* =========================================================
-   MOVE
-========================================================= */
-
-function move(
-    dx,
-    dz
-){
-
-    const x =
-        camera.position.x;
-
-    const z =
-        camera.position.z;
-
-
-    if(
-        !collision(
-            x + dx,
-            z,
-            .35
-        )
-    ){
-
-        camera.position.x += dx;
-
-    }
-
-
-    if(
-        !collision(
-            camera.position.x,
-            z + dz,
-            .35
-        )
-    ){
-
-        camera.position.z += dz;
-
-    }
-
-}
-
-
-/* =========================================================
-   PICKUPS UPDATE
-========================================================= */
-
-function updatePickups(){
-
-    for(const item of pickups){
-
-        if(item.collected)
-            continue;
-
-
-        item.mesh.rotation.y +=
-            .025;
-
-
-        const distance =
-            Math.hypot(
-
-                camera.position.x -
-                item.mesh.position.x,
-
-                camera.position.z -
-                item.mesh.position.z
-
-            );
-
-
-        if(distance < 1){
-
-            item.collected = true;
-
-            scene.remove(
-                item.mesh
-            );
-
-
-            if(
-                item.type === "key"
-            ){
-
-                player.hasKey =
-                    true;
-
-                $("objective")
-                    .textContent =
-                    "Anahtarı aldın. Çıkışa git.";
-
-                showMessage(
-                    "🔑 ANAHTARI ALDIN",
-                    2000
-                );
-
-            }
-
-
-            if(
-                item.type === "fuse"
-            ){
-
-                player.hasFuse =
-                    true;
-
-                $("objective")
-                    .textContent =
-                    "Sigortayı aldın. Kodu kullan.";
-
-                showMessage(
-                    "⚡ SİGORTAYI ALDIN",
-                    2000
-                );
-
-            }
-
-
-            if(
-                item.type === "battery"
-            ){
-
-                player.battery =
-                    Math.min(
-                        100,
-                        player.battery + 40
-                    );
-
-                showMessage(
-                    "🔋 PİL +40",
-                    1500
-                );
-
-            }
-
-
-            if(
-                item.type === "medkit"
-            ){
-
-                player.health =
-                    Math.min(
-                        100,
-                        player.health + 35
-                    );
-
-                showMessage(
-                    "❤️ CAN +35",
-                    1500
-                );
-
-            }
-
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   ETKİLEŞİM
-========================================================= */
-
-function interact(){
-
-    if(player.hidden){
-
-        player.hidden = false;
-
-        $("hidden").style.display =
-            "none";
-
-        showMessage(
-            "Saklanma yerinden çıktın.",
-            1500
-        );
-
-        return;
-
-    }
-
-
-    /* saklanma */
-
-    for(const h of hidingSpots){
-
-        if(
-            distance(
-                camera.position,
-                h.mesh.position
-            ) < 1.7
-        ){
-
-            player.hidden = true;
-
-            $("hidden").style.display =
-                "block";
-
-            showMessage(
-                "Saklandın.",
-                1500
-            );
-
-            return;
-
-        }
-
-    }
-
-
-    /* not */
-
-    for(const n of notes){
-
-        if(
-            distance(
-                camera.position,
-                n.mesh.position
-            ) < 1.6
-        ){
-
-            openNote(n);
-
-            return;
-
-        }
-
-    }
-
-
-    /* panel */
-
-    for(const p of panels){
-
-        if(
-            distance(
-                camera.position,
-                p.mesh.position
-            ) < 1.8
-        ){
-
-            openKeypad(
-                p.code
-            );
-
-            return;
-
-        }
-
-    }
-
-
-    /* kapı */
-
-    for(const d of doors){
-
-        if(
-            distance(
-                camera.position,
-                d.group.position
-            ) < 2.2
-        ){
-
-            openDoor(d);
-
-            return;
-
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   KAPI
-========================================================= */
-
-function openDoor(d){
-
-    if(d.open)
-        return;
-
-
-    if(
-        d.required === "key" &&
-        !player.hasKey
-    ){
-
-        showMessage(
-            "🔒 Anahtar gerekiyor.",
-            1500
-        );
-
-        return;
-
-    }
-
-
-    if(
-        d.required === "0415" &&
-        player.code !== "0415"
-    ){
-
-        showMessage(
-            "🔒 Önce 0415 kodunu gir.",
-            1500
-        );
-
-        return;
-
-    }
-
-
-    if(
-        d.required === "7392" &&
-        (
-            !player.hasFuse ||
-            player.code !== "7392"
-        )
-    ){
-
-        showMessage(
-            "🔒 Sigorta ve 7392 gerekiyor.",
-            1500
-        );
-
-        return;
-
-    }
-
-
-    d.open = true;
-
-    soundDoor();
-
-}
-
-
-/* =========================================================
-   KAPI ANİMASYON
-========================================================= */
-
-function updateDoors(dt){
-
-    for(const d of doors){
-
-        const target =
-            d.open ? 1 : 0;
-
-
-        d.progress +=
-            (
-                target -
-                d.progress
-            ) *
-            Math.min(
-                1,
-                dt * 5
-            );
-
-
-        d.pivot.rotation.y =
-            -d.progress *
-            Math.PI / 2;
-
-    }
-
-}
-
-
-/* =========================================================
-   ÇIKIŞ
-========================================================= */
-
-function checkExit(){
-
-    for(const d of doors){
-
-        if(!d.open)
-            continue;
-
-
-        if(
-            distance(
-                camera.position,
-                d.group.position
-            ) < 1.8
-        ){
-
-            if(
-                camera.position.z <
-                -15
-            ){
-
-                if(level < 2){
-
-                    buildLevel(
-                        level + 1
-                    );
-
-                    showMessage(
-                        "LEVEL " +
-                        level +
-                        " BAŞLADI",
-                        2500
-                    );
-
-                }else{
-
-                    showMessage(
-                        "BACKROOMS TAMAMLANDI!",
-                        5000
-                    );
-
-                }
-
-            }
-
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   NOT AÇ
-========================================================= */
-
-function openNote(n){
-
-    $("noteTitle")
-        .textContent =
-        n.title;
-
-    $("noteText")
-        .innerHTML =
-        n.text;
-
-
-    if(
-        n.text.includes("0415")
-    ){
-
-        player.code =
-            "0415";
-
-    }
-
-
-    if(
-        n.text.includes("7392")
-    ){
-
-        player.code =
-            "7392";
-
-    }
-
-
-    $("notePanel")
-        .style.display =
-        "flex";
-
-}
-
-
-/* =========================================================
-   NOT KAPAT
-========================================================= */
-
-$("closeNote")
-.addEventListener(
-    "click",
-    () => {
-
-        $("notePanel")
-            .style.display =
-            "none";
-
-    }
-);
-
-
-/* =========================================================
-   NOT YAKIN
-========================================================= */
-
-function nearestNote(){
-
-    let nearest = null;
-    let best = 999;
-
-
-    for(const n of notes){
-
-        const d =
-            distance(
-                camera.position,
-                n.mesh.position
-            );
-
-
-        if(
-            d < best &&
-            d < 2
-        ){
-
-            best = d;
-
-            nearest = n;
-
-        }
-
-    }
-
-
-    if(nearest){
-
-        openNote(nearest);
-
-    }
-
-}
-
-
-/* =========================================================
-   KEYPAD
-========================================================= */
-
-let correctCode = "";
-let typedCode = "";
-
-
-function openKeypad(code){
-
-    correctCode = code;
-
-    typedCode = "";
-
-    $("codeDisplay")
-        .textContent = "";
-
-    $("keypad")
-        .style.display =
-        "flex";
-
-}
-
-
-document
-.querySelectorAll(
-    ".keyGrid button"
-)
-.forEach(
-    button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const key =
-                    button.dataset.key;
-
-
-                if(
-                    key === "clear"
-                ){
-
-                    typedCode = "";
-
-                }
-                else if(
-                    key === "enter"
-                ){
-
-                    if(
-                        typedCode ===
-                        correctCode
-                    ){
-
-                        player.code =
-                            correctCode;
-
-                        $("keypad")
-                            .style.display =
-                            "none";
-
-                        showMessage(
-                            "🔓 DOĞRU ŞİFRE",
-                            1800
-                        );
-
-                        $("objective")
-                            .textContent =
-                            "Çıkış kapısına git.";
-
-                    }else{
-
-                        typedCode = "";
-
-                        showMessage(
-                            "❌ HATALI ŞİFRE",
-                            1500
-                        );
-
-                    }
-
-                }
-                else if(
-                    typedCode.length < 4
-                ){
-
-                    typedCode += key;
-
-                }
-
-
-                $("codeDisplay")
-                    .textContent =
-                    typedCode
-                    .split("")
-                    .map(
-                        () => "•"
-                    )
-                    .join("");
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================================
-   FENER
-========================================================= */
-
-function toggleFlashlight(){
-
-    if(
-        player.battery <= 0
-    ){
-
-        showMessage(
-            "🔋 Fenerin pili bitti.",
-            1500
-        );
-
-        return;
-
-    }
-
-
-    flashlightOn =
-        !flashlightOn;
-
-
-    flashlight.visible =
-        flashlightOn;
-
-
-    soundTone(
-        flashlightOn
-        ? 700
-        : 300,
-        .08,
-        .06
-    );
-
-}
-
-
-/* =========================================================
-   MESAFE
-========================================================= */
-
-function distance(a,b){
-
-    return Math.hypot(
-        a.x-b.x,
-        a.z-b.z
-    );
-
-}
-
-
-/* =========================================================
-   HINT
-========================================================= */
-
-function updateInteractionHint(){
-
-    if(player.hidden){
-
-        $("interactionHint")
-            .style.display =
-            "block";
-
-        $("interactionHint")
-            .textContent =
-            "✋ ETKİLEŞ → Çık";
-
-        return;
-
-    }
-
-
-    let text = "";
-
-
-    for(const h of hidingSpots){
-
-        if(
-            distance(
-                camera.position,
-                h.mesh.position
-            ) < 1.7
-        ){
-
-            text =
-                "✋ ETKİLEŞ → SAKLAN";
-
-        }
-
-    }
-
-
-    for(const n of notes){
-
-        if(
-            distance(
-                camera.position,
-                n.mesh.position
-            ) < 1.6
-        ){
-
-            text =
-                "📜 NOT → OKU";
-
-        }
-
-    }
-
-
-    for(const p of panels){
-
-        if(
-            distance(
-                camera.position,
-                p.mesh.position
-            ) < 1.8
-        ){
-
-            text =
-                "🔢 ETKİLEŞ → ŞİFRE";
-
-        }
-
-    }
-
-
-    for(const d of doors){
-
-        if(
-            distance(
-                camera.position,
-                d.group.position
-            ) < 2.2
-        ){
-
-            text =
-                "🚪 ETKİLEŞ → KAPI";
-
-        }
-
-    }
-
-
-    $("interactionHint")
-        .textContent =
-        text;
-
-
-    $("interactionHint")
-        .style.display =
-        text
-        ? "block"
-        : "none";
-
-}
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-function setupKeyboard(){
-
-    window.addEventListener(
-        "keydown",
-        e => {
-
-            keys[e.code] = true;
-
-
-            if(
-                e.code ===
-                "ShiftLeft" ||
-                e.code ===
-                "ShiftRight"
-            ){
-
-                player.running =
-                    true;
-
-            }
-
-
-            if(
-                e.code === "KeyF"
-            ){
-
-                toggleFlashlight();
-
-            }
-
-
-            if(
-                e.code === "KeyE"
-            ){
-
-                interact();
-
-            }
-
-
-            if(
-                e.code === "KeyQ"
-            ){
-
-                nearestNote();
-
-            }
-
-        }
-    );
-
-
-    window.addEventListener(
-        "keyup",
-        e => {
-
-            keys[e.code] = false;
-
-
-            if(
-                e.code ===
-                "ShiftLeft" ||
-                e.code ===
-                "ShiftRight"
-            ){
-
-                player.running =
-                    false;
-
-            }
-
-        }
-    );
-
-
-    /* PC kamera */
-
-    renderer.domElement
-    .addEventListener(
-        "click",
-        () => {
-
-            if(
-                innerWidth > 900
-            ){
-
-                renderer.domElement
-                    .requestPointerLock?.();
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "mousemove",
-        e => {
-
-            if(
-                document.pointerLockElement !==
-                renderer.domElement
-            )
-                return;
-
-
-            cameraYaw -=
-                e.movementX *
-                .0025 *
-                sensitivity;
-
-
-            cameraPitch -=
-                e.movementY *
-                .0025 *
-                sensitivity;
-
-
-            cameraPitch =
-                THREE.MathUtils.clamp(
-                    cameraPitch,
-                    -1.4,
-                    1.4
-                );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   MOBİL SİSTEM
-========================================================= */
-
-function setupMobile(){
-
-    const joystick =
-        $("joystick");
-
-    const knob =
-        $("joystickKnob");
-
-
-    /* =================
-       JOYSTICK DOWN
-    ================= */
-
-    joystick.addEventListener(
-        "pointerdown",
-        e => {
-
-            e.preventDefault();
-
-            joy.active = true;
-
-            joy.id =
-                e.pointerId;
-
-
-            joystick.setPointerCapture(
-                e.pointerId
-            );
-
-
-            updateJoystick(
-                e
-            );
-
-        }
-    );
-
-
-    /* =================
-       JOYSTICK MOVE
-    ================= */
-
-    joystick.addEventListener(
-        "pointermove",
-        e => {
-
-            if(
-                !joy.active ||
-                e.pointerId !== joy.id
-            )
-                return;
-
-
-            e.preventDefault();
-
-            updateJoystick(e);
-
-        }
-    );
-
-
-    /* =================
-       JOYSTICK END
-    ================= */
-
-    const joystickEnd =
-        e => {
-
-            if(
-                e.pointerId !==
-                joy.id
-            )
-                return;
-
-
-            joy.active = false;
-
-            joy.x = 0;
-            joy.y = 0;
-
-
-            knob.style.left =
-                "50%";
-
-            knob.style.top =
-                "50%";
-
-        };
-
-
-    joystick.addEventListener(
-        "pointerup",
-        joystickEnd
-    );
-
-    joystick.addEventListener(
-        "pointercancel",
-        joystickEnd
-    );
-
-
-    /* =================
-       KAMERA ALANI
-    ================= */
-
-    const cameraZone =
-        $("cameraZone");
-
-
-    cameraZone.addEventListener(
-        "pointerdown",
-        e => {
-
-            e.preventDefault();
-
-            touchLook.active =
-                true;
-
-            touchLook.id =
-                e.pointerId;
-
-            touchLook.x =
-                e.clientX;
-
-            touchLook.y =
-                e.clientY;
-
-
-            cameraZone.setPointerCapture(
-                e.pointerId
-            );
-
-        }
-    );
-
-
-    cameraZone.addEventListener(
-        "pointermove",
-        e => {
-
-            if(
-                !touchLook.active ||
-                e.pointerId !==
-                touchLook.id
-            )
-                return;
-
-
-            e.preventDefault();
-
-
-            const dx =
-                e.clientX -
-                touchLook.x;
-
-            const dy =
-                e.clientY -
-                touchLook.y;
-
-
-            touchLook.x =
-                e.clientX;
-
-            touchLook.y =
-                e.clientY;
-
-
-            cameraYaw -=
-                dx *
-                .008 *
-                sensitivity;
-
-
-            cameraPitch -=
-                dy *
-                .008 *
-                sensitivity;
-
-
-            cameraPitch =
-                THREE.MathUtils.clamp(
-                    cameraPitch,
-                    -1.4,
-                    1.4
-                );
-
-        }
-    );
-
-
-    const lookEnd =
-        e => {
-
-            if(
-                e.pointerId !==
-                touchLook.id
-            )
-                return;
-
-
-            touchLook.active =
-                false;
-
-        };
-
-
-    cameraZone.addEventListener(
-        "pointerup",
-        lookEnd
-    );
-
-    cameraZone.addEventListener(
-        "pointercancel",
-        lookEnd
-    );
-
-
-    /* =================
-       BUTONLAR
-    ================= */
-
-    setupRun();
-
-    setupAction(
-        "flashButton",
-        () => toggleFlashlight()
-    );
-
-    setupAction(
-        "interactButton",
-        () => interact()
-    );
-
-    setupAction(
-        "noteButton",
-        () => nearestNote()
-    );
-
-    setupAction(
-        "soundButton",
-        () => {
-
-            initAudio();
-
-            showMessage(
-                "🔊 SES AKTİF",
-                1200
-            );
-
-        }
-    );
-
-
-    setupTurn(
-        "leftButton",
-        -1
-    );
-
-    setupTurn(
-        "rightButton",
-        1
-    );
-
-}
-
-
-/* =========================================================
-   JOYSTICK UPDATE
-========================================================= */
-
-function updateJoystick(e){
-
-    const rect =
-        $("joystick")
-        .getBoundingClientRect();
-
-
-    const centerX =
-        rect.left +
-        rect.width / 2;
-
-
-    const centerY =
-        rect.top +
-        rect.height / 2;
-
-
-    let dx =
-        e.clientX -
-        centerX;
-
-
-    let dy =
-        e.clientY -
-        centerY;
-
-
-    const max =
-        rect.width / 2 -
-        33;
-
-
-    const len =
-        Math.hypot(
-            dx,
-            dy
-        );
-
-
-    if(len > max){
-
-        dx =
-            dx / len *
-            max;
-
-        dy =
-            dy / len *
-            max;
-
-    }
-
-
-    joy.x =
-        dx / max;
-
-
-    joy.y =
-        -dy / max;
-
-
-    $("joystickKnob")
-        .style.left =
-        `calc(50% + ${dx}px)`;
-
-
-    $("joystickKnob")
-        .style.top =
-        `calc(50% + ${dy}px)`;
-
-}
-
-
-/* =========================================================
-   KOŞ BUTONU
-========================================================= */
-
-function setupRun(){
-
-    const button =
-        $("runButton");
-
-
-    button.addEventListener(
-        "pointerdown",
-        e => {
-
-            e.preventDefault();
-
-            player.running =
-                true;
-
-            button.classList.add(
-                "active"
-            );
-
-        }
-    );
-
-
-    const stop =
-        () => {
-
-            player.running =
-                false;
-
-            button.classList.remove(
-                "active"
-            );
-
-        };
-
-
-    button.addEventListener(
-        "pointerup",
-        stop
-    );
-
-    button.addEventListener(
-        "pointercancel",
-        stop
-    );
-
-}
-
-
-/* =========================================================
-   NORMAL BUTON
-========================================================= */
-
-function setupAction(
-    id,
-    action
-){
-
-    const button =
-        $(id);
-
-
-    button.addEventListener(
-        "pointerdown",
-        e => {
-
-            e.preventDefault();
-
-            action();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   KAMERA BUTONLARI
-========================================================= */
-
-function setupTurn(
-    id,
-    direction
-){
-
-    const button =
-        $(id);
-
-
-    let active = false;
-
-
-    button.addEventListener(
-        "pointerdown",
-        e => {
-
-            e.preventDefault();
-
-            active = true;
-
-            button.classList.add(
-                "active"
-            );
-
-        }
-    );
-
-
-    button.addEventListener(
-        "pointerup",
-        () => {
-
-            active = false;
-
-            button.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    button.addEventListener(
-        "pointercancel",
-        () => {
-
-            active = false;
-
-            button.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    function update(){
-
-        if(active){
-
-            cameraYaw +=
-                direction *
-                .035 *
-                sensitivity;
-
-        }
-
-        requestAnimationFrame(
-            update
-        );
-
-    }
-
-
-    update();
-
-}
-
-
-/* =========================================================
-   SES
-========================================================= */
+/* =====================================================
+   AUDIO
+===================================================== */
 
 function initAudio(){
 
-    if(audio)
-        return;
+  if(audioContext) return;
 
-
-    try{
-
-        audio =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
-
-
-        master =
-            audio.createGain();
-
-
-        master.gain.value =
-            .18;
-
-
-        master.connect(
-            audio.destination
-        );
-
-
-    }catch(e){}
+  audioContext =
+    new (window.AudioContext ||
+         window.webkitAudioContext)();
 
 }
-
-
-/* =========================================================
-   SES TONU
-========================================================= */
 
 function soundTone(
-    frequency,
-    duration,
-    volume = .1,
-    type = "sine"
+  frequency,
+  duration,
+  volume,
+  type="sine"
 ){
 
-    if(!audio)
-        return;
+  if(!audioContext) return;
 
+  const oscillator =
+    audioContext.createOscillator();
 
-    if(
-        audio.state ===
-        "suspended"
-    ){
+  const gain =
+    audioContext.createGain();
 
-        audio.resume();
+  oscillator.type = type;
 
-    }
+  oscillator.frequency.value =
+    frequency;
 
+  gain.gain.value =
+    volume;
 
-    const oscillator =
-        audio.createOscillator();
+  oscillator.connect(gain);
 
+  gain.connect(
+    audioContext.destination
+  );
 
-    const gain =
-        audio.createGain();
+  oscillator.start();
 
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audioContext.currentTime + duration
+  );
 
-    oscillator.type =
-        type;
-
-
-    oscillator.frequency.value =
-        frequency;
-
-
-    gain.gain.setValueAtTime(
-        volume,
-        audio.currentTime
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-        .001,
-        audio.currentTime +
-        duration
-    );
-
-
-    oscillator.connect(gain);
-
-    gain.connect(master);
-
-
-    oscillator.start();
-
-
-    oscillator.stop(
-        audio.currentTime +
-        duration
-    );
+  oscillator.stop(
+    audioContext.currentTime + duration
+  );
 
 }
 
+function doorSound(){
 
-/* =========================================================
-   ADIM SESLERİ
-========================================================= */
+  soundTone(80,.3,.12,"sawtooth");
 
-function footsteps(
-    running
-){
+}
 
-    if(
-        footstepTimer !== null
-    )
-        return;
+function pickupSound(){
 
+  soundTone(600,.08,.08);
 
-    const interval =
-        running
-        ? 250
-        : 430;
+  setTimeout(
+    ()=>soundTone(850,.1,.06),
+    70
+  );
 
+}
 
-    soundTone(
-        running
-        ? 70
-        : 105,
-        .08,
-        running
-        ? .12
-        : .07,
-        "triangle"
-    );
+function jumpscareSound(){
 
+  soundTone(45,.8,.3,"sawtooth");
 
-    footstepTimer =
-        setInterval(
-            () => {
+  setTimeout(
+    ()=>soundTone(180,.5,.2,"square"),
+    100
+  );
 
-                soundTone(
-                    running
-                    ? 70
-                    : 105,
-                    .08,
-                    running
-                    ? .12
-                    : .07,
-                    "triangle"
-                );
+}
 
-            },
-            interval
+/* =====================================================
+   FOOTSTEPS
+===================================================== */
+
+function footsteps(running){
+
+  if(currentFootstepMode ===
+     (running ? "run":"walk")){
+
+    return;
+
+  }
+
+  stopFootsteps();
+
+  currentFootstepMode =
+    running ? "run":"walk";
+
+  const interval =
+    running ? 250:430;
+
+  const frequency =
+    running ? 70:105;
+
+  const volume =
+    running ? .13:.07;
+
+  soundTone(
+    frequency,
+    .08,
+    volume,
+    "triangle"
+  );
+
+  footstepTimer =
+    setInterval(
+      ()=>{
+
+        soundTone(
+          frequency,
+          .08,
+          volume,
+          "triangle"
         );
 
-}
+      },
+      interval
+    );
 
+}
 
 function stopFootsteps(){
 
+  if(footstepTimer !== null){
+
+    clearInterval(
+      footstepTimer
+    );
+
+    footstepTimer = null;
+
+  }
+
+  currentFootstepMode = null;
+
+}
+
+/* =====================================================
+   GAME CREATE
+===================================================== */
+
+function createGame(){
+
+  scene =
+    new THREE.Scene();
+
+  scene.background =
+    new THREE.Color(
+      0x171208
+    );
+
+  scene.fog =
+    new THREE.Fog(
+      0x171208,
+      20,
+      65
+    );
+
+  camera =
+    new THREE.PerspectiveCamera(
+      75,
+      innerWidth / innerHeight,
+      .05,
+      200
+    );
+
+  camera.position.set(
+    0,
+    1.65,
+    8
+  );
+
+  renderer =
+    new THREE.WebGLRenderer({
+      antialias:true
+    });
+
+  renderer.setSize(
+    innerWidth,
+    innerHeight
+  );
+
+  renderer.setPixelRatio(
+    Math.min(
+      devicePixelRatio,
+      1.5
+    )
+  );
+
+  document.body.appendChild(
+    renderer.domElement
+  );
+
+  clock =
+    new THREE.Clock();
+
+  /* LIGHT */
+
+  const ambient =
+    new THREE.AmbientLight(
+      0xffe6a3,
+      .28
+    );
+
+  scene.add(
+    ambient
+  );
+
+  /* FLOOR */
+
+  const floor =
+    new THREE.Mesh(
+
+      new THREE.PlaneGeometry(
+        120,
+        120
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0x4d431e,
+        roughness:1
+      })
+
+    );
+
+  floor.rotation.x =
+    -Math.PI/2;
+
+  floor.position.y = 0;
+
+  scene.add(floor);
+
+  /* FLASHLIGHT */
+
+  flashlight =
+    new THREE.SpotLight(
+      0xffffdf,
+      0,
+      30,
+      Math.PI/8,
+      .55,
+      1
+    );
+
+  flashlight.position.set(
+    0,
+    1.55,
+    0
+  );
+
+  flashlight.target.position.set(
+    0,
+    1.5,
+    -10
+  );
+
+  camera.add(
+    flashlight
+  );
+
+  camera.add(
+    flashlight.target
+  );
+
+  scene.add(camera);
+
+  window.addEventListener(
+    "resize",
+    onResize
+  );
+
+  animate();
+
+}
+
+/* =====================================================
+   LEVEL
+===================================================== */
+
+function clearLevel(){
+
+  doors = [];
+
+  objects = [];
+
+  noteObjects = [];
+
+  entity = null;
+
+  for(
+    const child of [...scene.children]
+  ){
+
     if(
-        footstepTimer !== null
+      child.userData &&
+      child.userData.levelObject
     ){
 
-        clearInterval(
-            footstepTimer
-        );
-
-        footstepTimer = null;
+      scene.remove(child);
 
     }
 
+  }
+
 }
 
+function buildLevel(number){
 
-/* =========================================================
-   KAPI SESİ
-========================================================= */
+  level = number;
 
-function soundDoor(){
+  clearLevel();
 
-    soundTone(
-        90,
-        .4,
-        .12,
-        "sawtooth"
+  camera.position.set(
+    0,
+    1.65,
+    8
+  );
+
+  cameraYaw = 0;
+
+  cameraPitch = 0;
+
+  $("levelText").textContent =
+    "LEVEL " + number;
+
+  if(number === 0){
+
+    buildLevel0();
+
+  }
+
+  else if(number === 1){
+
+    buildLevel1();
+
+  }
+
+  else{
+
+    buildLevel2();
+
+  }
+
+}
+
+/* =====================================================
+   WALL
+===================================================== */
+
+function wall(
+  x,
+  z,
+  width,
+  depth,
+  height=3
+){
+
+  const mesh =
+    new THREE.Mesh(
+
+      new THREE.BoxGeometry(
+        width,
+        height,
+        depth
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0x706229,
+        roughness:1
+      })
+
     );
 
+  mesh.position.set(
+    x,
+    height/2,
+    z
+  );
+
+  mesh.userData.levelObject =
+    true;
+
+  mesh.userData.wall =
+    true;
+
+  scene.add(mesh);
+
+  objects.push(mesh);
+
+  return mesh;
+
 }
 
+/* =====================================================
+   LEVEL 0
+===================================================== */
 
-/* =========================================================
-   JUMPSCARE
-========================================================= */
+function buildLevel0(){
 
-function jumpscare(){
+  const size = 20;
 
-    $("jumpscare")
-        .style.display =
-        "flex";
+  wall(
+    0,
+    -size,
+    40,
+    1
+  );
 
+  wall(
+    0,
+    size,
+    40,
+    1
+  );
 
-    soundTone(
-        45,
+  wall(
+    -size,
+    0,
+    1,
+    40
+  );
+
+  wall(
+    size,
+    0,
+    1,
+    40
+  );
+
+  /* INTERIOR WALLS */
+
+  wall(
+    -8,
+    -5,
+    1,
+    22
+  );
+
+  wall(
+    8,
+    5,
+    1,
+    22
+  );
+
+  wall(
+    0,
+    4,
+    16,
+    1
+  );
+
+  wall(
+    -4,
+    -12,
+    10,
+    1
+  );
+
+  createDoor(
+    0,
+    -19.4,
+    0,
+    0
+  );
+
+  createKey(
+    -10,
+    1,
+    -5
+  );
+
+  createNote(
+    7,
+    1,
+    -8,
+    "Duvarların arasında bir çıkış olmalı. Anahtarı bul."
+  );
+
+  createEntity(
+    12,
+    1.2,
+    -12
+  );
+
+}
+
+/* =====================================================
+   LEVEL 1
+===================================================== */
+
+function buildLevel1(){
+
+  wall(
+    0,
+    -25,
+    50,
+    1
+  );
+
+  wall(
+    0,
+    25,
+    50,
+    1
+  );
+
+  wall(
+    -25,
+    0,
+    1,
+    50
+  );
+
+  wall(
+    25,
+    0,
+    1,
+    50
+  );
+
+  wall(
+    -10,
+    0,
+    1,
+    35
+  );
+
+  wall(
+    8,
+    -8,
+    20,
+    1
+  );
+
+  wall(
+    0,
+    8,
+    16,
+    1
+  );
+
+  createDoor(
+    0,
+    -24.4,
+    0,
+    1
+  );
+
+  createFuse(
+    13,
+    1,
+    13
+  );
+
+  createNote(
+    -5,
+    1,
+    14,
+    "Panel kodu: 0415"
+  );
+
+  createEntity(
+    -17,
+    1.2,
+    -16
+  );
+
+}
+
+/* =====================================================
+   LEVEL 2
+===================================================== */
+
+function buildLevel2(){
+
+  wall(
+    0,
+    -30,
+    60,
+    1
+  );
+
+  wall(
+    0,
+    30,
+    60,
+    1
+  );
+
+  wall(
+    -30,
+    0,
+    1,
+    60
+  );
+
+  wall(
+    30,
+    0,
+    1,
+    60
+  );
+
+  wall(
+    -12,
+    -5,
+    1,
+    35
+  );
+
+  wall(
+    12,
+    5,
+    1,
+    35
+  );
+
+  createDoor(
+    0,
+    -29.4,
+    0,
+    2
+  );
+
+  createNote(
+    -20,
+    1,
+    -12,
+    "Son kapının kodu: 7392"
+  );
+
+  createMedkit(
+    17,
+    1,
+    -17
+  );
+
+  createBattery(
+    -17,
+    1,
+    15
+  );
+
+  createEntity(
+    18,
+    1.2,
+    15
+  );
+
+}
+
+/* =====================================================
+   DOOR
+===================================================== */
+
+function createDoor(
+  x,
+  z,
+  rotation,
+  doorLevel
+){
+
+  const pivot =
+    new THREE.Group();
+
+  pivot.position.set(
+    x,
+    0,
+    z
+  );
+
+  pivot.rotation.y =
+    rotation;
+
+  pivot.userData.levelObject =
+    true;
+
+  pivot.userData.door =
+    true;
+
+  pivot.userData.open =
+    false;
+
+  const mesh =
+    new THREE.Mesh(
+
+      new THREE.BoxGeometry(
+        2.8,
+        3,
+        .25
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0x22201a
+      })
+
+    );
+
+  mesh.position.set(
+    1.4,
+    1.5,
+    0
+  );
+
+  pivot.add(mesh);
+
+  scene.add(pivot);
+
+  doors.push({
+    pivot,
+    level:doorLevel,
+    target:0
+  });
+
+}
+
+/* =====================================================
+   KEY
+===================================================== */
+
+function createKey(
+  x,
+  y,
+  z
+){
+
+  const key =
+    new THREE.Mesh(
+
+      new THREE.TorusGeometry(
+        .18,
+        .045,
+        8,
+        20
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0xffd44d
+      })
+
+    );
+
+  key.position.set(
+    x,
+    y,
+    z
+  );
+
+  key.userData.levelObject =
+    true;
+
+  key.userData.pickup =
+    "key";
+
+  scene.add(key);
+
+  objects.push(key);
+
+}
+
+/* =====================================================
+   FUSE
+===================================================== */
+
+function createFuse(
+  x,
+  y,
+  z
+){
+
+  const fuse =
+    new THREE.Mesh(
+
+      new THREE.BoxGeometry(
+        .3,
+        .6,
+        .3
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0xd8d8d8
+      })
+
+    );
+
+  fuse.position.set(
+    x,
+    y,
+    z
+  );
+
+  fuse.userData.levelObject =
+    true;
+
+  fuse.userData.pickup =
+    "fuse";
+
+  scene.add(fuse);
+
+  objects.push(fuse);
+
+}
+
+/* =====================================================
+   MEDKIT
+===================================================== */
+
+function createMedkit(
+  x,
+  y,
+  z
+){
+
+  const med =
+    new THREE.Mesh(
+
+      new THREE.BoxGeometry(
+        .7,
+        .3,
+        .5
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0xdd3333
+      })
+
+    );
+
+  med.position.set(
+    x,
+    y,
+    z
+  );
+
+  med.userData.levelObject =
+    true;
+
+  med.userData.pickup =
+    "medkit";
+
+  scene.add(med);
+
+  objects.push(med);
+
+}
+
+/* =====================================================
+   BATTERY
+===================================================== */
+
+function createBattery(
+  x,
+  y,
+  z
+){
+
+  const bat =
+    new THREE.Mesh(
+
+      new THREE.CylinderGeometry(
+        .15,
+        .15,
         .5,
-        .25,
-        "sawtooth"
+        12
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0xdddd44
+      })
+
     );
 
+  bat.position.set(
+    x,
+    y,
+    z
+  );
 
-    setTimeout(
-        () => {
+  bat.rotation.z =
+    Math.PI/2;
 
-            $("jumpscare")
-                .style.display =
-                "none";
+  bat.userData.levelObject =
+    true;
 
-        },
-        650
-    );
+  bat.userData.pickup =
+    "battery";
+
+  scene.add(bat);
+
+  objects.push(bat);
 
 }
 
+/* =====================================================
+   NOTE
+===================================================== */
 
-/* =========================================================
-   ÖLÜM
-========================================================= */
+function createNote(
+  x,
+  y,
+  z,
+  text
+){
 
-function die(){
+  const note =
+    new THREE.Mesh(
 
-    stopFootsteps();
+      new THREE.BoxGeometry(
+        .7,
+        .9,
+        .05
+      ),
 
-    $("dead")
-        .style.display =
-        "flex";
+      new THREE.MeshStandardMaterial({
+        color:0xe4d7a0
+      })
+
+    );
+
+  note.position.set(
+    x,
+    y,
+    z
+  );
+
+  note.userData.levelObject =
+    true;
+
+  note.userData.note =
+    text;
+
+  scene.add(note);
+
+  noteObjects.push(note);
 
 }
 
+/* =====================================================
+   ENTITY
+===================================================== */
 
-$("restart")
-.addEventListener(
+function createEntity(
+  x,
+  y,
+  z
+){
+
+  const group =
+    new THREE.Group();
+
+  group.position.set(
+    x,
+    y,
+    z
+  );
+
+  group.userData.levelObject =
+    true;
+
+  group.userData.entity =
+    true;
+
+  const body =
+    new THREE.Mesh(
+
+      new THREE.CylinderGeometry(
+        .55,
+        .75,
+        2.2,
+        12
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0x151515
+      })
+
+    );
+
+  body.position.y =
+    0;
+
+  group.add(body);
+
+  const head =
+    new THREE.Mesh(
+
+      new THREE.SphereGeometry(
+        .48,
+        16,
+        16
+      ),
+
+      new THREE.MeshStandardMaterial({
+        color:0xd8d8d8
+      })
+
+    );
+
+  head.position.y =
+    1.25;
+
+  group.add(head);
+
+  scene.add(group);
+
+  entity = group;
+
+}
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+function setupKeyboard(){
+
+  window.addEventListener(
+    "keydown",
+    e => {
+
+      if(e.code === "KeyW")
+        keys.w = true;
+
+      if(e.code === "KeyA")
+        keys.a = true;
+
+      if(e.code === "KeyS")
+        keys.s = true;
+
+      if(e.code === "KeyD")
+        keys.d = true;
+
+      if(e.code === "ShiftLeft" ||
+         e.code === "ShiftRight")
+        keys.shift = true;
+
+      if(e.code === "KeyF")
+        toggleFlashlight();
+
+      if(e.code === "KeyE")
+        interact();
+
+      if(e.code === "KeyQ")
+        openNearbyNote();
+
+    }
+  );
+
+  window.addEventListener(
+    "keyup",
+    e => {
+
+      if(e.code === "KeyW")
+        keys.w = false;
+
+      if(e.code === "KeyA")
+        keys.a = false;
+
+      if(e.code === "KeyS")
+        keys.s = false;
+
+      if(e.code === "KeyD")
+        keys.d = false;
+
+      if(e.code === "ShiftLeft" ||
+         e.code === "ShiftRight")
+        keys.shift = false;
+
+    }
+  );
+
+  renderer.domElement.addEventListener(
     "click",
     () => {
 
-        $("dead")
-            .style.display =
-            "none";
+      if(!gameStarted) return;
 
-
-        player.health = 100;
-        player.stamina = 100;
-        player.battery = 100;
-
-        player.hidden = false;
-
-        flashlightOn = false;
-
-        flashlight.visible =
-            false;
-
-
-        buildLevel(0);
+      renderer.domElement.requestPointerLock?.();
 
     }
+  );
+
+  document.addEventListener(
+    "mousemove",
+    e => {
+
+      if(
+        document.pointerLockElement !==
+        renderer.domElement
+      ) return;
+
+      cameraYaw -=
+        e.movementX *
+        .0025 *
+        sensitivity;
+
+      cameraPitch -=
+        e.movementY *
+        .0025 *
+        sensitivity;
+
+      cameraPitch =
+        THREE.MathUtils.clamp(
+          cameraPitch,
+          -1.35,
+          1.35
+        );
+
+    }
+  );
+
+}
+
+/* =====================================================
+   MOBILE LAYOUT
+===================================================== */
+
+function isMobile(){
+
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    window.innerWidth <= 900
+  );
+
+}
+
+function updateMobileLayout(){
+
+  if(!gameStarted) return;
+
+  const mobile =
+    isMobile();
+
+  if(!mobile){
+
+    $("mobileControls").style.display =
+      "none";
+
+    $("rotateScreen").style.display =
+      "none";
+
+    return;
+
+  }
+
+  const portrait =
+    window.innerHeight >
+    window.innerWidth;
+
+  if(portrait){
+
+    $("mobileControls").style.display =
+      "none";
+
+    $("rotateScreen").style.display =
+      "flex";
+
+  }else{
+
+    $("rotateScreen").style.display =
+      "none";
+
+    $("mobileControls").style.display =
+      "block";
+
+  }
+
+}
+
+window.addEventListener(
+  "resize",
+  updateMobileLayout
 );
 
+window.addEventListener(
+  "orientationchange",
+  () => {
 
-/* =========================================================
+    setTimeout(
+      updateMobileLayout,
+      150
+    );
+
+  }
+);
+
+/* =====================================================
+   MOBILE CONTROLS
+===================================================== */
+
+function setupMobile(){
+
+  const joystick =
+    $("joystick");
+
+  const knob =
+    $("joystickKnob");
+
+  const cameraZone =
+    $("cameraZone");
+
+  let joystickPointer =
+    null;
+
+  /* =====================
+     JOYSTICK
+  ===================== */
+
+  joystick.addEventListener(
+    "pointerdown",
+    e => {
+
+      e.preventDefault();
+
+      joystickPointer =
+        e.pointerId;
+
+      joystick.setPointerCapture(
+        e.pointerId
+      );
+
+      updateJoystick(
+        e
+      );
+
+    }
+  );
+
+  joystick.addEventListener(
+    "pointermove",
+    e => {
+
+      if(
+        e.pointerId !==
+        joystickPointer
+      ) return;
+
+      e.preventDefault();
+
+      updateJoystick(
+        e
+      );
+
+    }
+  );
+
+  function resetJoystick(){
+
+    joy.x = 0;
+
+    joy.y = 0;
+
+    knob.style.transform =
+      "translate(0px,0px)";
+
+    joystickPointer = null;
+
+  }
+
+  joystick.addEventListener(
+    "pointerup",
+    resetJoystick
+  );
+
+  joystick.addEventListener(
+    "pointercancel",
+    resetJoystick
+  );
+
+  joystick.addEventListener(
+    "lostpointercapture",
+    resetJoystick
+  );
+
+  /* =====================
+     CAMERA DRAG
+  ===================== */
+
+  let cameraPointer = null;
+
+  let lastX = 0;
+  let lastY = 0;
+
+  cameraZone.addEventListener(
+    "pointerdown",
+    e => {
+
+      e.preventDefault();
+
+      cameraPointer =
+        e.pointerId;
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      cameraZone.setPointerCapture(
+        e.pointerId
+      );
+
+    }
+  );
+
+  cameraZone.addEventListener(
+    "pointermove",
+    e => {
+
+      if(
+        e.pointerId !==
+        cameraPointer
+      ) return;
+
+      e.preventDefault();
+
+      const dx =
+        e.clientX - lastX;
+
+      const dy =
+        e.clientY - lastY;
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      cameraYaw -=
+        dx *
+        .008 *
+        sensitivity;
+
+      cameraPitch -=
+        dy *
+        .008 *
+        sensitivity;
+
+      cameraPitch =
+        THREE.MathUtils.clamp(
+          cameraPitch,
+          -1.35,
+          1.35
+        );
+
+    }
+  );
+
+  cameraZone.addEventListener(
+    "pointerup",
+    () => {
+
+      cameraPointer = null;
+
+    }
+  );
+
+  cameraZone.addEventListener(
+    "pointercancel",
+    () => {
+
+      cameraPointer = null;
+
+    }
+  );
+
+  /* =====================
+     RUN
+  ===================== */
+
+  const run =
+    $("runButton");
+
+  function runStart(e){
+
+    e.preventDefault();
+
+    player.running = true;
+
+  }
+
+  function runStop(e){
+
+    e.preventDefault();
+
+    player.running = false;
+
+  }
+
+  run.addEventListener(
+    "pointerdown",
+    runStart
+  );
+
+  run.addEventListener(
+    "pointerup",
+    runStop
+  );
+
+  run.addEventListener(
+    "pointercancel",
+    runStop
+  );
+
+  run.addEventListener(
+    "pointerleave",
+    runStop
+  );
+
+  /* =====================
+     FLASHLIGHT
+  ===================== */
+
+  $("flashButton")
+    .addEventListener(
+      "pointerdown",
+      e => {
+
+        e.preventDefault();
+
+        toggleFlashlight();
+
+      }
+    );
+
+  /* =====================
+     INTERACT
+  ===================== */
+
+  $("interactButton")
+    .addEventListener(
+      "pointerdown",
+      e => {
+
+        e.preventDefault();
+
+        interact();
+
+      }
+    );
+
+  /* =====================
+     NOTE
+  ===================== */
+
+  $("noteButton")
+    .addEventListener(
+      "pointerdown",
+      e => {
+
+        e.preventDefault();
+
+        openNearbyNote();
+
+      }
+    );
+
+  /* =====================
+     SOUND
+  ===================== */
+
+  $("soundButton")
+    .addEventListener(
+      "pointerdown",
+      e => {
+
+        e.preventDefault();
+
+        if(audioContext){
+
+          if(
+            audioContext.state ===
+            "suspended"
+          ){
+
+            audioContext.resume();
+
+          }
+
+          soundTone(
+            500,
+            .1,
+            .08
+          );
+
+        }
+
+      }
+    );
+
+  /* =====================
+     CAMERA BUTTONS
+  ===================== */
+
+  setupTurnButton(
+    $("leftButton"),
+    -1
+  );
+
+  setupTurnButton(
+    $("rightButton"),
+    1
+  );
+
+}
+
+/* =====================================================
+   JOYSTICK
+===================================================== */
+
+function updateJoystick(e){
+
+  const joystick =
+    $("joystick");
+
+  const knob =
+    $("joystickKnob");
+
+  const rect =
+    joystick.getBoundingClientRect();
+
+  const centerX =
+    rect.left +
+    rect.width/2;
+
+  const centerY =
+    rect.top +
+    rect.height/2;
+
+  let dx =
+    e.clientX -
+    centerX;
+
+  let dy =
+    e.clientY -
+    centerY;
+
+  const max =
+    rect.width/2 -
+    34;
+
+  const distance =
+    Math.sqrt(
+      dx*dx +
+      dy*dy
+    );
+
+  if(distance > max){
+
+    dx =
+      dx/distance*max;
+
+    dy =
+      dy/distance*max;
+
+  }
+
+  joy.x =
+    dx/max;
+
+  joy.y =
+    -dy/max;
+
+  knob.style.transform =
+    `translate(${dx}px,${dy}px)`;
+
+}
+
+/* =====================================================
+   CAMERA BUTTON
+===================================================== */
+
+function setupTurnButton(
+  button,
+  direction
+){
+
+  let active = false;
+
+  function loop(){
+
+    if(!active) return;
+
+    cameraYaw +=
+      direction *
+      .035 *
+      sensitivity;
+
+    requestAnimationFrame(
+      loop
+    );
+
+  }
+
+  button.addEventListener(
+    "pointerdown",
+    e => {
+
+      e.preventDefault();
+
+      active = true;
+
+      loop();
+
+    }
+  );
+
+  const stop =
+    () => {
+
+      active = false;
+
+    };
+
+  button.addEventListener(
+    "pointerup",
+    stop
+  );
+
+  button.addEventListener(
+    "pointercancel",
+    stop
+  );
+
+  button.addEventListener(
+    "pointerleave",
+    stop
+  );
+
+}
+
+/* =====================================================
+   FLASHLIGHT
+===================================================== */
+
+function toggleFlashlight(){
+
+  if(battery <= 0){
+
+    flashlightOn = false;
+
+    flashlight.intensity = 0;
+
+    return;
+
+  }
+
+  flashlightOn =
+    !flashlightOn;
+
+  flashlight.intensity =
+    flashlightOn ? 4:0;
+
+  soundTone(
+    flashlightOn ? 650:300,
+    .07,
+    .05,
+    "square"
+  );
+
+}
+
+/* =====================================================
+   INTERACT
+===================================================== */
+
+function interact(){
+
+  const playerPos =
+    camera.position;
+
+  /* PICKUPS */
+
+  for(
+    let i=objects.length-1;
+    i>=0;
+    i--
+  ){
+
+    const obj =
+      objects[i];
+
+    if(!obj.parent) continue;
+
+    const distance =
+      playerPos.distanceTo(
+        obj.position
+      );
+
+    if(distance < 2.2){
+
+      if(
+        obj.userData.pickup ===
+        "key"
+      ){
+
+        obj.parent.remove(obj);
+
+        player.key = true;
+
+        pickupSound();
+
+        showMessage(
+          "ANAHTARI ALDIN",
+          1800
+        );
+
+        return;
+
+      }
+
+      if(
+        obj.userData.pickup ===
+        "fuse"
+      ){
+
+        obj.parent.remove(obj);
+
+        player.fuse = true;
+
+        pickupSound();
+
+        showMessage(
+          "SİGORTAYI ALDIN",
+          1800
+        );
+
+        return;
+
+      }
+
+      if(
+        obj.userData.pickup ===
+        "medkit"
+      ){
+
+        obj.parent.remove(obj);
+
+        health =
+          Math.min(
+            100,
+            health+35
+          );
+
+        pickupSound();
+
+        showMessage(
+          "CAN YENİLENDİ",
+          1500
+        );
+
+        return;
+
+      }
+
+      if(
+        obj.userData.pickup ===
+        "battery"
+      ){
+
+        obj.parent.remove(obj);
+
+        battery =
+          Math.min(
+            100,
+            battery+40
+          );
+
+        pickupSound();
+
+        showMessage(
+          "FENER PİLİ DOLDU",
+          1500
+        );
+
+        return;
+
+      }
+
+    }
+
+  }
+
+  /* DOORS */
+
+  for(
+    const d of doors
+  ){
+
+    const doorPos =
+      new THREE.Vector3();
+
+    d.pivot.getWorldPosition(
+      doorPos
+    );
+
+    const distance =
+      playerPos.distanceTo(
+        doorPos
+      );
+
+    if(distance < 3){
+
+      if(
+        level === 0 &&
+        !player.key
+      ){
+
+        showMessage(
+          "KAPI KİLİTLİ — ANAHTAR GEREKİYOR",
+          2000
+        );
+
+        return;
+
+      }
+
+      if(
+        level === 1 &&
+        !player.fuse
+      ){
+
+        showMessage(
+          "PANEL ÇALIŞMIYOR — SİGORTA GEREKİYOR",
+          2000
+        );
+
+        return;
+
+      }
+
+      d.target =
+        d.target === 0 ?
+        Math.PI/2:
+        0;
+
+      doorSound();
+
+      return;
+
+    }
+
+  }
+
+}
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+function openNearbyNote(){
+
+  if(
+    $("notePanel").style.display ===
+    "block"
+  ){
+
+    $("notePanel").style.display =
+      "none";
+
+    return;
+
+  }
+
+  let closest = null;
+
+  let distance = Infinity;
+
+  for(
+    const note of noteObjects
+  ){
+
+    const d =
+      camera.position.distanceTo(
+        note.position
+      );
+
+    if(
+      d < distance &&
+      d < 3
+    ){
+
+      distance = d;
+
+      closest = note;
+
+    }
+
+  }
+
+  if(!closest){
+
+    showMessage(
+      "YAKINDA NOT YOK",
+      1200
+    );
+
+    return;
+
+  }
+
+  currentNote =
+    closest;
+
+  $("noteText").textContent =
+    closest.userData.note;
+
+  $("notePanel").style.display =
+    "block";
+
+}
+
+$("closeNote")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("notePanel").style.display =
+        "none";
+
+    }
+  );
+
+/* =====================================================
+   MOVEMENT
+===================================================== */
+
+function updatePlayer(dt){
+
+  let forward = 0;
+  let side = 0;
+
+  if(keys.w)
+    forward += 1;
+
+  if(keys.s)
+    forward -= 1;
+
+  if(keys.d)
+    side += 1;
+
+  if(keys.a)
+    side -= 1;
+
+  forward += joy.y;
+
+  side += joy.x;
+
+  const moving =
+    Math.abs(forward) > .05 ||
+    Math.abs(side) > .05;
+
+  let wantsRun =
+    player.running ||
+    keys.shift;
+
+  let running =
+    wantsRun &&
+    moving &&
+    stamina > 0;
+
+  if(running){
+
+    stamina -=
+      dt * 28;
+
+    stamina =
+      Math.max(
+        0,
+        stamina
+      );
+
+  }else{
+
+    stamina +=
+      dt * 18;
+
+    stamina =
+      Math.min(
+        100,
+        stamina
+      );
+
+  }
+
+  const speed =
+    running ? 6.5:3.2;
+
+  if(moving){
+
+    const length =
+      Math.sqrt(
+        forward*forward +
+        side*side
+      );
+
+    if(length > 1){
+
+      forward /= length;
+      side /= length;
+
+    }
+
+    const direction =
+      new THREE.Vector3();
+
+    direction.x =
+      Math.sin(cameraYaw) *
+      forward +
+      Math.cos(cameraYaw) *
+      side;
+
+    direction.z =
+      Math.cos(cameraYaw) *
+      forward -
+      Math.sin(cameraYaw) *
+      side;
+
+    const oldPosition =
+      camera.position.clone();
+
+    camera.position.x +=
+      direction.x *
+      speed *
+      dt;
+
+    camera.position.z +=
+      direction.z *
+      speed *
+      dt;
+
+    if(collides()){
+
+      camera.position.copy(
+        oldPosition
+      );
+
+    }
+
+    footsteps(
+      running
+    );
+
+  }else{
+
+    stopFootsteps();
+
+  }
+
+  camera.position.y =
+    1.65;
+
+  camera.rotation.order =
+    "YXZ";
+
+  camera.rotation.y =
+    cameraYaw;
+
+  camera.rotation.x =
+    cameraPitch;
+
+}
+
+/* =====================================================
+   COLLISION
+===================================================== */
+
+function collides(){
+
+  const radius =
+    .35;
+
+  for(
+    const obj of objects
+  ){
+
+    if(
+      !obj.userData.wall
+    ) continue;
+
+    const box =
+      new THREE.Box3()
+        .setFromObject(obj);
+
+    if(
+      camera.position.x >
+        box.min.x-radius &&
+      camera.position.x <
+        box.max.x+radius &&
+      camera.position.z >
+        box.min.z-radius &&
+      camera.position.z <
+        box.max.z+radius
+    ){
+
+      return true;
+
+    }
+
+  }
+
+  return false;
+
+}
+
+/* =====================================================
+   DOORS UPDATE
+===================================================== */
+
+function updateDoors(){
+
+  for(
+    const d of doors
+  ){
+
+    d.pivot.rotation.y +=
+      (d.target -
+       d.pivot.rotation.y) *
+      .12;
+
+  }
+
+}
+
+/* =====================================================
+   ENTITY
+===================================================== */
+
+function updateEntity(dt){
+
+  if(!entity) return;
+
+  const direction =
+    new THREE.Vector3();
+
+  direction.subVectors(
+    camera.position,
+    entity.position
+  );
+
+  direction.y = 0;
+
+  const distance =
+    direction.length();
+
+  if(distance < 15){
+
+    direction.normalize();
+
+    entity.rotation.y =
+      Math.atan2(
+        direction.x,
+        direction.z
+      );
+
+    if(distance > 2){
+
+      entity.position.x +=
+        direction.x *
+        dt *
+        1.5;
+
+      entity.position.z +=
+        direction.z *
+        dt *
+        1.5;
+
+    }
+
+    if(distance < 1.5){
+
+      jumpscare();
+
+    }
+
+  }
+
+}
+
+/* =====================================================
+   JUMPSCARE
+===================================================== */
+
+let scareActive = false;
+
+function jumpscare(){
+
+  if(scareActive) return;
+
+  scareActive = true;
+
+  jumpscareSound();
+
+  $("jumpscare").style.display =
+    "flex";
+
+  setTimeout(
+    () => {
+
+      $("jumpscare").style.display =
+        "none";
+
+      health = 0;
+
+      die();
+
+    },
+    800
+  );
+
+}
+
+/* =====================================================
+   DEATH
+===================================================== */
+
+function die(){
+
+  stopFootsteps();
+
+  $("deathScreen").style.display =
+    "flex";
+
+}
+
+$("restartButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("deathScreen").style.display =
+        "none";
+
+      health = 100;
+
+      stamina = 100;
+
+      battery = 100;
+
+      player = {
+
+        running:false,
+        hidden:false,
+        key:false,
+        fuse:false
+
+      };
+
+      scareActive = false;
+
+      buildLevel(level);
+
+    }
+  );
+
+/* =====================================================
+   BATTERY
+===================================================== */
+
+function updateBattery(dt){
+
+  if(
+    flashlightOn
+  ){
+
+    battery -=
+      dt * 3;
+
+    if(battery <= 0){
+
+      battery = 0;
+
+      flashlightOn = false;
+
+      flashlight.intensity =
+        0;
+
+    }
+
+  }
+
+}
+
+/* =====================================================
+   EXIT
+===================================================== */
+
+function checkExit(){
+
+  if(
+    camera.position.z <
+    -18
+  ){
+
+    if(level === 0){
+
+      if(player.key){
+
+        buildLevel(1);
+
+        showMessage(
+          "LEVEL 1 — SIGORTAYI BUL",
+          3000
+        );
+
+      }
+
+    }
+
+    else if(level === 1){
+
+      if(player.fuse){
+
+        buildLevel(2);
+
+        showMessage(
+          "LEVEL 2 — SON KAPI",
+          3000
+        );
+
+      }
+
+    }
+
+    else if(level === 2){
+
+      showMessage(
+        "ÇIKIŞI BULDUN!",
+        5000
+      );
+
+    }
+
+  }
+
+}
+
+/* =====================================================
    HUD
-========================================================= */
+===================================================== */
 
 function updateHUD(){
 
-    $("level")
-        .textContent =
-        level;
+  $("healthBar").style.width =
+    health + "%";
 
+  $("staminaBar").style.width =
+    stamina + "%";
 
-    $("health")
-        .textContent =
-        Math.round(
-            player.health
-        );
-
-
-    $("stamina")
-        .textContent =
-        Math.round(
-            player.stamina
-        );
-
-
-    $("battery")
-        .textContent =
-        Math.round(
-            player.battery
-        );
-
-
-    $("healthFill")
-        .style.width =
-        player.health + "%";
-
-
-    $("staminaFill")
-        .style.width =
-        player.stamina + "%";
-
-
-    $("batteryFill")
-        .style.width =
-        player.battery + "%";
+  $("batteryBar").style.width =
+    battery + "%";
 
 }
 
+/* =====================================================
+   MESSAGE
+===================================================== */
 
-/* =========================================================
-   MESAJ
-========================================================= */
-
-let messageTimer;
-
+let messageTimer = null;
 
 function showMessage(
-    text,
-    time = 1800
+  text,
+  duration=2000
 ){
 
-    $("message")
-        .textContent =
-        text;
+  $("message").textContent =
+    text;
 
+  clearTimeout(
+    messageTimer
+  );
 
-    $("message")
-        .classList.add(
-            "show"
-        );
+  messageTimer =
+    setTimeout(
+      () => {
 
+        $("message").textContent =
+          "";
 
-    clearTimeout(
-        messageTimer
+      },
+      duration
     );
-
-
-    messageTimer =
-        setTimeout(
-            () => {
-
-                $("message")
-                    .classList.remove(
-                        "show"
-                    );
-
-            },
-            time
-        );
 
 }
 
-
-/* =========================================================
+/* =====================================================
    RESIZE
-========================================================= */
+===================================================== */
 
-function resize(){
+function onResize(){
 
-    if(!camera || !renderer)
-        return;
+  if(!camera || !renderer)
+    return;
 
+  camera.aspect =
+    innerWidth /
+    innerHeight;
 
-    camera.aspect =
-        innerWidth /
-        innerHeight;
+  camera.updateProjectionMatrix();
 
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        innerWidth,
-        innerHeight
-    );
+  renderer.setSize(
+    innerWidth,
+    innerHeight
+  );
 
 }
 
-
-/* =========================================================
-   ANIMATE
-========================================================= */
+/* =====================================================
+   ANIMATION
+===================================================== */
 
 function animate(){
 
-    requestAnimationFrame(
-        animate
+  requestAnimationFrame(
+    animate
+  );
+
+  if(
+    !gameStarted ||
+    !camera ||
+    !renderer
+  ){
+
+    return;
+
+  }
+
+  const dt =
+    Math.min(
+      clock.getDelta(),
+      .05
     );
 
+  updatePlayer(dt);
 
-    if(
-        !gameStarted ||
-        !clock
-    )
-        return;
+  updateDoors();
 
+  updateEntity(dt);
 
-    const dt =
-        Math.min(
-            clock.getDelta(),
-            .05
-        );
+  updateBattery(dt);
 
+  updateHUD();
 
-    updatePlayer(dt);
+  checkExit();
 
-    updateEntity(dt);
+  if(
+    health <= 0
+  ){
 
-    updateHUD();
+    die();
 
+  }
 
-    renderer.render(
-        scene,
-        camera
-    );
+  renderer.render(
+    scene,
+    camera
+  );
 
 }
-
 
 </script>
 
